@@ -1,1 +1,1 @@
-# Minimit
+# Minim'it
