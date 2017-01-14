@@ -12,8 +12,8 @@ class AddOeuvres extends Seeder
     public function run()
     {
         // Simple set of movies for our tests
-
-        DB::table('oeuvre')->insert([
+        $table = 'oeuvres';
+        DB::table($table)->insert([
             'title_ov' => "Hauru no ugoku shiro",
             'title_en' => "Howl's Moving Castle",
             'title_fr' => "Le château ambulant",
@@ -21,7 +21,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Aladdin",
             'title_en' => "Aladdin",
             'title_fr' => "Aladdin",
@@ -29,7 +29,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "The AristoCats",
             'title_en' => "The AristoCats",
             'title_fr' => "Les aristochats",
@@ -37,7 +37,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Finding Nemo",
             'title_en' => "Finding Nemo",
             'title_fr' => "Le monde de Nemo",
@@ -45,7 +45,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Her",
             'title_en' => "Her",
             'title_fr' => "Her",
@@ -53,7 +53,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Léon",
             'title_en' => "Léon: The Professional",
             'title_fr' => "Léon",
@@ -61,7 +61,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "The Shining",
             'title_en' => "The Shining",
             'title_fr' => "Shining",
@@ -69,7 +69,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Back to the Future",
             'title_en' => "Back to the Future",
             'title_fr' => "Retour vers le futur",
@@ -77,7 +77,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Back to the Future Part II",
             'title_en' => "Back to the Future Part II",
             'title_fr' => "Retour vers le futur 2",
@@ -85,7 +85,7 @@ class AddOeuvres extends Seeder
             'active' => 1
         ]);
 
-        DB::table('oeuvre')->insert([
+        DB::table($table)->insert([
             'title_ov' => "Back to the Future Part III",
             'title_en' => "Back to the Future Part III",
             'title_fr' => "Retour vers le futur 3",
