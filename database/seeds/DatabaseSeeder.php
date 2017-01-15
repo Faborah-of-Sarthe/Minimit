@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AddOeuvres::class);
         $this->call(AddPosters::class);
         $this->call(AddSelections::class);
+        $this->call(AddHomeSelections::class);
     }
 }
