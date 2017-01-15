@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AddHomeSelections::class);
         $this->call(AddTags::class);
         $this->call(AddNotes::class);
+        $this->call(AddFavourites::class);
     }
 }
