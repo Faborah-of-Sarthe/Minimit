@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AddSelections::class);
         $this->call(AddHomeSelections::class);
         $this->call(AddTags::class);
+        $this->call(AddNotes::class);
     }
 }
