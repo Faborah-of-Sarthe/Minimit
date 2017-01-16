@@ -26,4 +26,37 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the posters for one user
+     */
+     public function posters()
+     {
+         return $this->hasMany("App\Poster");
+     }
+
+    /**
+     * Get the selections for one user
+     */
+     public function selections()
+     {
+         return $this->hasMany("App\Selection");
+     }
+
+    /**
+     * Get the favourites for one user
+     */
+     public function favourites()
+     {
+         return $this->hasMany("App\Favourite");
+     }
+
+    /**
+     * Get the notes for one user
+     */
+     public function notes()
+     {
+         return $this->hasMany("App\Note");
+     }
+
 }
