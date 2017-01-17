@@ -14,4 +14,12 @@ class Tag extends Model
     protected $fillable = [
         'title_fr', 'title_en', 'description_fr', 'description_en', 'code',
     ];
+
+    /**
+     * Get the selections for one tag
+     */
+     public function selections()
+     {
+         return $this->belongsToMany("App\Selection");
+     }
 }

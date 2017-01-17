@@ -14,4 +14,12 @@ class Image extends Model
     protected $fillable = [
         'filepath', 'level',
     ];
+    
+    /**
+     * Get the poster for one image
+     */
+     public function poster()
+     {
+         return $this->belongsTo("App\Poster");
+     }
 }

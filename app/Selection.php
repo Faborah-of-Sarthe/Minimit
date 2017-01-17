@@ -39,4 +39,28 @@ class Selection extends Model
      {
          return $this->hasMany("App\Favourite");
      }
+
+    /**
+     * Get the posters for one selection
+     */
+     public function posters()
+     {
+         return $this->belongsToMany("App\Poster")->withPivot('order');
+     }
+
+    /**
+     * Get the tags for one selection
+     */
+     public function tags()
+     {
+         return $this->belongsToMany("App\Tag");
+     }
+
+    /**
+     * Get the home selections for one selection
+     */
+     public function selectionsHome()
+     {
+         return $this->hasMany("App\SelectionHome");
+     }
 }

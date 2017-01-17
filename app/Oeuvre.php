@@ -14,4 +14,12 @@ class Oeuvre extends Model
     protected $fillable = [
         'title_ov', 'title_fr', 'title_en', 'year', 'active',
     ];
+
+    /**
+     * Get the posters for one oeuvre
+     */
+     public function posters()
+     {
+         return $this->hasMany("App\Poster");
+     }
 }
