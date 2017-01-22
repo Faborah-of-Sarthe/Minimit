@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 Route::get('switch-lang/{lang}', 'LanguageController@switch');
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
