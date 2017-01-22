@@ -78,6 +78,8 @@ return [
     */
 
     'locale' => env('APP_LOCALE', 'fr'),
+    'locales' => env('APP_LOCALES', 'fr,en'),
+    'locales_fallback' => env('APP_FALLBACK_LOCALES', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +164,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...
