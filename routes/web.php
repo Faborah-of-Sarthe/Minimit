@@ -14,3 +14,6 @@
 Auth::routes();
 Route::get('switch-lang/{lang}', 'LanguageController@switch');
 Route::get('/', 'HomeController@index');
+Route::get('account', function(){
+    return view('account.dash');
+});
