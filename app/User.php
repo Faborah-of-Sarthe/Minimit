@@ -28,14 +28,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Return the is_admin value
-     */
-    public function isAdmin()
-    {
-        return $this->is_admin;
-    }
-
-    /**
      * Get the posters for one user
      */
      public function posters()

@@ -15,3 +15,7 @@ Auth::routes();
 Route::get('switch-lang/{lang}', 'LanguageController@switch');
 Route::get('/', 'HomeController@index');
 Route::get('account', ['as' => 'account.dashboard', 'uses' => 'AccountController@dashboard']);
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
+    Route::resource('oeuvre', 'OeuvreController', ['except' => ['show']]);
+});

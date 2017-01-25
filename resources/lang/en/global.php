@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'delete' => 'Delete',
     'list_menu'   => 'Selections list',
     'login_menu' => 'My account',
     'random_menu' => 'Random poster',
