@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 use Config;
+use Cookie;
 use App;
 
 class Language
@@ -20,12 +21,16 @@ class Language
      */
     public function handle($request, Closure $next)
     {
-        if(!Session::has('locale')){
+        if(!Session::has('locale') && !Cookie::get('language')) {
             $locale = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
             $locales = explode(',', Config::get('app.locales'));
             $language = (in_array($locale, $locales))? $locale : Config::get('app.locales_fallback');
             Session::put('locale', $language);
-        }else{
+        }
+        elseif (Cookie::get('language')) {
+            $language = Cookie::get('language');
+        }
+        else {
             $language = Session::get('locale', Config::get('app.locale'));
         }
         App::setLocale($language);

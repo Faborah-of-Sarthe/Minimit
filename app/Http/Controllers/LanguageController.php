@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Cookie;
 
 class LanguageController extends Controller
 {
@@ -13,7 +14,8 @@ class LanguageController extends Controller
      */
     public function switch($lang)
     {
+        $cookie = Cookie::forever('language', $lang);
         Session::put('locale', $lang);
-        return redirect()->back();
+        return redirect()->back()->withCookie($cookie);
     }
 }
