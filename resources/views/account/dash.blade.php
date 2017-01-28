@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', trans('account.dash_title'))
+
 @section('content')
     <a href="{{ url('/logout') }}"
     onclick="event.preventDefault();

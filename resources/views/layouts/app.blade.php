@@ -19,7 +19,8 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
+        window.Laravel =
+        <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
@@ -38,7 +39,36 @@
             </div>
         </nav>
 
-        @yield('content')
+        @if(Session::has('error'))
+            <div class="alert alert-error">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+        @if(Session::has('message'))
+            <div class="alert alert-success">
+                {{ Session::get('message') }}
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (View::hasSection('backlink'))
+            <div class="backlink">
+                <a href="{{ route(View::yieldContent('backlink')) }}" rel="nofollow">{{ trans("global.backlink") }}</a>
+            </div>
+        @endif
+
+
+        <div class="content">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

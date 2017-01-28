@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'dash_title' => 'Dashboard',
     'logout' => 'Déconnexion',
     'oeuvre_list' => 'Liste des oeuvres',
 

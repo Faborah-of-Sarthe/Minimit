@@ -12,9 +12,11 @@ return [
     */
 
     'active_label' => 'Activated',
+    'add_title' => 'New oeuvre',
     'create_link' => 'Create an oeuvre',
     'create_success_msg' => 'Oeuvre successfully created.',
     'destroy_success_msg' => 'Oeuvre successfully removed.',
+    'edit_title' => 'Edit oeuvre',
     'empty_list' => 'No oeuvre to display',
     'list_title' => 'Oeuvre list',
     'submit' => 'Submit',

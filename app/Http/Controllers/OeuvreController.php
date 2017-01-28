@@ -46,7 +46,7 @@ class OeuvreController extends Controller
         ]);
         $oeuvre = new Oeuvre;
         $oeuvre->create($request->all());
-        Session::flash('status',trans('oeuvre.create_success_msg'));
+        Session::flash('message',trans('oeuvre.create_success_msg'));
         return redirect()->route('oeuvre.index');
     }
 
@@ -82,7 +82,7 @@ class OeuvreController extends Controller
            ]);
         }
         $oeuvre->update($request->all());
-        Session::flash('status',trans('oeuvre.update_success_msg'));
+        Session::flash('message',trans('oeuvre.update_success_msg'));
         return redirect()->route('oeuvre.index');
     }
 
@@ -95,7 +95,7 @@ class OeuvreController extends Controller
     public function destroy(Oeuvre $oeuvre)
     {
         $oeuvre->delete();
-        Session::flash('status',trans('oeuvre.destroy_success_msg'));
+        Session::flash('message',trans('oeuvre.destroy_success_msg'));
         return redirect()->route('oeuvre.index');
     }
 }

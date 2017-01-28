@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'backlink' => 'Go back',
     'delete' => 'Delete',
     'list_menu'   => 'Selections list',
     'login_menu' => 'My account',

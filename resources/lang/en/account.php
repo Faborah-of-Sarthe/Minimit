@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'dash_title' => 'Dashboard',
     'logout' => 'Logout',
     'oeuvre_list' => 'Oeuvre list',
 ];

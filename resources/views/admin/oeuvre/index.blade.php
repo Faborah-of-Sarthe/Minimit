@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', trans('oeuvre.list_title'))
+@section('backlink', 'account.dashboard')
 
 @section('content')
     <a href="{{ route('oeuvre.create') }}">{!! trans('oeuvre.create_link') !!}</a>

@@ -12,9 +12,11 @@ return [
     */
 
     'active_label' => 'Activée',
+    'add_title' => 'Nouvelle oeuvre',
     'create_link' => 'Ajouter une oeuvre',
     'create_success_msg' => 'Oeuvre créée avec succès.',
     'destroy_success_msg' => 'Oeuvre supprimée avec succès.',
+    'edit_title' => 'Éditer une oeuvre',
     'empty_list' => 'Aucune oeuvre disponible',
     'list_title' => 'Liste des oeuvres',
     'submit' => 'Envoyer',
