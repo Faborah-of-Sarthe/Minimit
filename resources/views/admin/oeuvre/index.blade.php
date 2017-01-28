@@ -7,7 +7,9 @@
         @forelse ($oeuvres as $oeuvre)
             <li>
                 <a href="{{ route('oeuvre.edit', [$oeuvre->id]) }}">{{ $oeuvre->title_ov }}</a>
-                <a href="{{ route('oeuvre.destroy', [$oeuvre->id]) }}">{!! trans('global.delete') !!}</a>
+                {{ Form::model($oeuvre, ['route' => ['oeuvre.destroy', $oeuvre->id], 'method' => 'delete']) }}
+                    {{ Form::submit(trans('global.delete')) }}
+                {{ Form::close() }}
             </li>
         @empty
             {!! trans('oeuvre.empty_list') !!}

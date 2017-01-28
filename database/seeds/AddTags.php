@@ -30,7 +30,7 @@ class AddTags extends Seeder
         DB::table('tags')->insert([
             'title_fr' => 'Date de sortie',
             'title_en' => 'Release date',
-            'description_fr' => "Films sortis à une mếme époque (1989, années 90)",
+            'description_fr' => "Films sortis à une même époque (1989, années 90)",
             'description_en' => 'Films released around a same period (1989, nineties)',
             'code' => 'period'
         ]);

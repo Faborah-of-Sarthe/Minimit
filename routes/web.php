@@ -18,4 +18,5 @@ Route::get('account', ['as' => 'account.dashboard', 'uses' => 'AccountController
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::resource('oeuvre', 'OeuvreController', ['except' => ['show']]);
+    Route::model('oeuvre', 'App\Oeuvre');
 });
