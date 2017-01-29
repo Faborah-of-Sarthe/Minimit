@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Oeuvre;
 use View;
 use Session;
+use Input;
 
 class OeuvreController extends Controller
 {
@@ -97,5 +98,65 @@ class OeuvreController extends Controller
         $oeuvre->delete();
         Session::flash('message',trans('oeuvre.destroy_success_msg'));
         return redirect()->route('oeuvre.index');
+    }
+
+    /**
+     * Returns a list of titles matching criteria
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $input = $request->input('oeuvre');
+        if(!$input) {
+            return response()->json($rep);
+        } else {
+            $matchingOeuvres = Oeuvre::where('title_ov', 'like', '%'.$input.'%')
+                ->orWhere('title_fr', 'like', '%'.$input.'%')
+                ->orWhere('title_en', 'like', '%'.$input.'%')
+                ->get();
+
+            if (count($matchingOeuvres)) {
+                $results = [];
+                foreach ($matchingOeuvres as $oeuvre) {
+                    // Fetch localized title
+                    $mainTitle = $oeuvre->title;
+                    // check if searched string is in localized title
+                    $mainTitle = strongify($input, $mainTitle);
+
+                    // check if searched string is in other locale title
+
+                    $OVTitle = $oeuvre->title_ov;
+                    $OVTitleStrong = strongify($input, $OVTitle);
+                    $secondaryTitle = $OVTitleStrong;
+                    $secondaryTitleLabel = trans('poster.label_oeuvre_title_ov');
+                    
+                    if ($OVTitle == $OVTitleStrong) {
+                        $otherLocale = (\App::getLocale() == 'fr')? 'en' : 'fr';
+                        $fieldTitle = 'title_'.$otherLocale;
+                        $otherLocaleTitle = $oeuvre->{$fieldTitle};
+                        $otherLocaleStrong = strongify($input, $otherLocaleTitle);
+
+                        if ($otherLocaleTitle != $otherLocaleStrong) {
+                            $secondaryTitle = $otherLocaleStrong;
+                            $secondaryTitleLabel = trans('poster.label_oeuvre_title_'.$otherLocale);
+                        }
+                    }
+
+                    $results[] = [
+                        'id' => $oeuvre->id,
+                        'mainTitle' => $mainTitle,
+                        'secondaryTitle' => $secondaryTitle,
+                        'secondaryTitleLabel' => $secondaryTitleLabel,
+                        'year' => $oeuvre->year,
+                    ];
+                }
+                return View::make('admin.oeuvre.autocomplete', compact('results'))->render();
+            } else {
+                $empty = trans('poster.no_matching_oeuvre');
+                return response()->json($matchingOeuvres);
+            }
+        }
     }
 }
