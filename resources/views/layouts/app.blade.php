@@ -69,9 +69,13 @@
         <div class="content">
             @yield('content')
         </div>
-    </div>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+
+        <div class="footer">
+            @yield('footer')
+            <!-- Scripts -->
+            <script src="/js/app.js"></script>
+        </div>
+    </div>
 </body>
 </html>

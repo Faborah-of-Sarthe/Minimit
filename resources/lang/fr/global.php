@@ -12,7 +12,9 @@ return [
     */
 
     'backlink' => 'Retour',
+    'cancel_btn' => 'Annuler',
     'delete' => 'Supprimer',
+    'delete_btn' => 'Supprimer',
     'list_menu'   => 'Liste des sélections',
     'login_menu' => 'Mon compte',
     'random_menu' => 'Poster au hasard',

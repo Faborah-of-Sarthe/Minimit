@@ -8,12 +8,16 @@
         @forelse ($oeuvres as $oeuvre)
             <li>
                 <a href="{{ route('oeuvre.edit', [$oeuvre->id]) }}">{{ $oeuvre->title_ov }}</a>
-                {{ Form::model($oeuvre, ['route' => ['oeuvre.destroy', $oeuvre->id], 'method' => 'delete']) }}
-                    {{ Form::submit(trans('global.delete')) }}
+                {{ Form::model($oeuvre, ['route' => ['oeuvre.destroy', $oeuvre->id], 'method' => 'delete', 'class' => 'id-'.$oeuvre->id]) }}
+                    {{ Form::submit(trans('global.delete'), ['class' => 'needs-confirm', 'data-text' => 'contenuuuu', 'data-id' => $oeuvre->id]) }}
                 {{ Form::close() }}
             </li>
         @empty
             {!! trans('oeuvre.empty_list') !!}
         @endforelse
     </ul>
+@endsection
+
+@section('footer')
+    @include('layouts.confirm-popup')
 @endsection

@@ -42,7 +42,7 @@ class OeuvreController extends Controller
             'title_ov' => 'required|max:255',
             'title_fr' => 'required|max:255',
             'title_fr' => 'required|max:255',
-            'year' => 'required|max:4',
+            'year' => 'required|numeric',
         ]);
         $oeuvre = new Oeuvre;
         $oeuvre->create($request->all());
@@ -74,7 +74,7 @@ class OeuvreController extends Controller
             'title_ov' => 'required|max:255',
             'title_fr' => 'required|max:255',
             'title_fr' => 'required|max:255',
-            'year' => 'required|max:4',
+            'year' => 'required|numeric',
         ]);
         if($request->active == null){
            $request->merge([

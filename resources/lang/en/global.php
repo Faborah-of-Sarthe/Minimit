@@ -12,6 +12,8 @@ return [
     */
 
     'backlink' => 'Go back',
+    'cancel_btn' => 'Cancel',
+    'delete_btn' => 'Delete',
     'delete' => 'Delete',
     'list_menu'   => 'Selections list',
     'login_menu' => 'My account',
