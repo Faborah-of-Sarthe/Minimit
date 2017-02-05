@@ -91,7 +91,8 @@ class PosterController extends Controller
 
     public function randomPoster()
     {
-        $poster = Poster::inRandomOrder()->first();
+        //$poster = Poster::inRandomOrder()->first();
+        $poster = Poster::find(6);
         $details = $this->getPosterDetails($poster);
 
         return View::make('poster.random', compact('poster', 'details'));

@@ -17,10 +17,19 @@ img{
 header{
     display: none;
 }
-.poster_wrapper {
+.poster-wrapper {
     text-align: center;
+    .images-wrapper {
+        overflow: hidden;
+        height: 100%;
+    }
+    .images-frame{
+        transition: transform .5s ease;
+    }
     .poster-img{
         max-height: 100vh;
         height: 100%;
+        display: block;
+        margin: 0 auto;
     }
 }

@@ -27,8 +27,9 @@ header{
     }
 }
 
-.poster_wrapper {
-    .poster-img{
+.poster-wrapper {
+    .images-wrapper,
+    .poster-img {
         max-height: calc(100vh - 80px);
     }
 }

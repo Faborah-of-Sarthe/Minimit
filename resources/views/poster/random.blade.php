@@ -2,7 +2,7 @@
 @section('title', trans('poster.random_poster_title'))
 
 @section('content')
-    <div class="poster_wrapper">
+    <div class="poster-wrapper">
         @include('poster.poster')
     </div>
 @endsection
