@@ -20,7 +20,7 @@ class AddSelections extends Seeder
             ]);
             for ($j=1; $j < 4; $j++) {
                 DB::table('poster_selection')->insert([
-                    'poster_id' => random_int(1, 10),
+                    'poster_id' => random_int(1, 8),
                     'selection_id' => $i,
                     'order' => $j
                 ]);

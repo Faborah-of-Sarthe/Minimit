@@ -10,7 +10,7 @@ class PosterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('auth', ['except' => ['show', 'randomPoster']]);
     }
 
     /**
@@ -52,7 +52,7 @@ class PosterController extends Controller
      */
     public function show(Poster $poster)
     {
-        return 'test';
+
     }
 
     /**
@@ -87,5 +87,23 @@ class PosterController extends Controller
     public function destroy(Poster $poster)
     {
         //
+    }
+
+    public function randomPoster()
+    {
+        $poster = Poster::inRandomOrder()->first();
+        $details = $this->getPosterDetails($poster);
+
+        return View::make('poster.random', compact('poster', 'details'));
+    }
+
+    public function getPosterDetails(Poster $poster)
+    {
+        $details = [];
+        $details['images'] = $poster->images()->orderBy('level')->get();
+        $details['oeuvre'] = $poster->oeuvre;
+        $details['author'] = $poster->user->name;
+
+        return $details;
     }
 }

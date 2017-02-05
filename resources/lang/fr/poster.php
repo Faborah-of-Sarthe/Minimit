@@ -14,5 +14,8 @@ return [
     'label_oeuvre_title_en' => 'EN :',
     'label_oeuvre_title_fr' => 'FR :',
     'label_oeuvre_title_ov' => 'VO :',
+    'next_button' => 'Suivant',
+    'poster_by' => 'Poster par :author',
+    'prev_button' => 'Précédent',
 
 ];
