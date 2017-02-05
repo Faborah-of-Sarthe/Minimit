@@ -5,3 +5,11 @@
 // Variables
 @import "variables";
 @import "structure";
+
+@media screen and (min-width: 480px) {
+    @import "medium";
+}
+
+@media screen and (min-width: 1024px) {
+    @import "large";
+}

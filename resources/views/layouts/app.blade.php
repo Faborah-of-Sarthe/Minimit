@@ -27,17 +27,21 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <header class="header">
             <div class="container">
-                <div class="navbar-header">
+                <div class="header-left header-part">
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="logo" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    <ul class="language-switcher">
+                        <li><a href="{{ action('LanguageController@switch', ['fr']) }}">Français</a></li>
+                        <li><a href="{{ action('LanguageController@switch', ['en']) }}">English</a></li>
+                    </ul>
                 </div>
                 @include('layouts.menus')
             </div>
-        </nav>
+        </header>
 
         @if(Session::has('error'))
             <div class="alert alert-error">

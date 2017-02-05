@@ -1,0 +1,34 @@
+header{
+    height: 80px;
+    background: $header-color;
+    display: block;
+
+    .container{
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        li{
+            display: inline-block;
+        }
+    }
+
+    .header-part{
+        display: flex;
+        align-items: center;
+        a{
+            padding: 0 .25em;
+        }
+    }
+    .header-left{
+        padding-left: 2em;
+    }
+    .header-right{
+        padding-right: 2em;
+    }
+}
+
+.poster_wrapper {
+    .poster-img{
+        max-height: calc(100vh - 80px);
+    }
+}
