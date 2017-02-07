@@ -4,15 +4,15 @@
             <img data-nb="{{ $key +1 }}" {{-- Starting at 1 instead of 0. Easier to map with levels --}}
                 {!! posterDetailSrcsets($image->filepath) !!}
                 alt="{!! trans('poster.poster_by', ['author' => $details['author']]) !!}"
-                class="poster-img @if ($key == 0) current @endif">
+                class="poster-img loading {{ ($key == 0) ? 'current' : '' }}">
         @endforeach
     </div>
 </div>
 <div class="controls">
-    <div class="previous">{!! trans('poster.prev_button') !!}</div>
-    <div class="next">{!! trans('poster.next_button') !!}</div>
+    <div data-id="{{ $idPrev or '' }}" data-selection="{{ $idSelection or '' }}" class="previous switch-poster">{!! trans('poster.prev_button') !!}</div>
+    <div data-id="{{ $idNext or '' }}" data-selection="{{ $idSelection or '' }}" class="next switch-poster">{!! trans('poster.next_button') !!}</div>
 </div>
-<div class="hints @if ($details['images']->count() == 1)hidden @endif">
+<div class="hints {{ ($details['images']->count() == 1) ? 'hidden' : '' }}">
     <div class="switch-level minus hidden"><span>-</span></div>
     <div class="switch-level plus"><span>+</span></div>
 </div>

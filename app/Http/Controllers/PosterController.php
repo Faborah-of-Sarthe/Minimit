@@ -89,11 +89,18 @@ class PosterController extends Controller
         //
     }
 
-    public function randomPoster()
+    /**
+     * Return the random poster page or an ajax view of a random poster
+     */
+    public function randomPoster(Request $request)
     {
-        //$poster = Poster::inRandomOrder()->first();
-        $poster = Poster::find(6);
+        $poster = Poster::inRandomOrder()->first();
+        // $poster = Poster::find(6);
         $details = $this->getPosterDetails($poster);
+
+        if ($request->ajax()) {
+            return View::make('poster.poster', compact('poster', 'details'));
+        }
 
         return View::make('poster.random', compact('poster', 'details'));
     }

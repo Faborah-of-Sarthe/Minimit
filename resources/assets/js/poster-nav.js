@@ -9,6 +9,13 @@ $(document).ready(function() {
          switchPosterLevel(direction);
      });
 
+     // Desktop events for poster switch
+      $(document).on('click', '.switch-poster', function(event){
+          var posterId = $(this).attr('data-id');
+          var selectionId = $(this).attr('data-selection');
+          switchPoster(posterId, selectionId);
+      });
+
      /**
      * Switch between the different levels on a poster
      */
@@ -67,4 +74,34 @@ $(document).ready(function() {
          }
      }
 
+     /**
+      * Switch between the different posters of a selection, or to a random poster
+      */
+     function switchPoster(posterId, selectionId) {
+         var params = { posterId, selectionId };
+
+         $.ajax({
+             url: ajaxPosterUrls.switchposter,
+             data: params,
+             beforeSend: function() { $('.poster-wrapper').addClass('loading'); },
+             complete: function() {
+                 $('.poster-wrapper').removeClass('loading');
+                 imagesLoaded();
+             }
+         })
+         .done(function(data) {
+             $('.poster-wrapper').html(data);
+         })
+         .fail(function() {
+             console.log("error");
+         })
+     }
 });
+
+// Remove the animation class on images
+function imagesLoaded() {
+    $('img.loading').on('load', function(){
+       $('img.loading').removeClass('loading');
+   });
+}
+imagesLoaded();
