@@ -1,9 +1,22 @@
 $(document).ready(function() {
 
-    /**
+    // Save the animation state
+    isAnimating = false;
+
+    // Desktop events for levels
+     $(document).on('click', '.switch-level', function(event){
+         var direction = ($(this).hasClass('minus')) ? 'minus' : 'plus';
+         switchPosterLevel(direction);
+     });
+
+     /**
      * Switch between the different levels on a poster
      */
-     $(document).on('click', '.switch-level', function(event){
+     function switchPosterLevel(direction) {
+         // If animating, do nothing
+         if (isAnimating == true)
+            return;
+
          // Which level is currently displayed
          var currentImage = $('.images-wrapper .poster-img.current');
          var currentLevel = parseInt(currentImage.attr('data-nb'));
@@ -16,13 +29,16 @@ $(document).ready(function() {
          // Height of one image
          var heightPoster = currentImage.height();
 
+         // Declare running animation
+         isAnimating = true;
+
          // Get the current frame position in order to slide up/down
          var translateValue = (imagesFrame.css('transform') != 'none')? imagesFrame.css('transform') : 'matrix(0,0,0,0,0,0)';
              translateValue = translateValue.split('(')[1].split(')')[0].split(',');
              translateValue = parseInt(translateValue[5]);
 
          // Which button has been pressed
-         if ($(this).hasClass('minus') && currentLevel > 1) {
+         if (direction == 'minus' && currentLevel > 1) {
              var newLevel = currentLevel-1;
              translateValue += heightPoster;
              plusBtn.removeClass('hidden');
@@ -34,17 +50,21 @@ $(document).ready(function() {
          // Slide the frame
          imagesFrame.css('transform', 'translateY('+translateValue+'px)');
 
+         // Update the animation state
+         imagesFrame.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+             isAnimating = false;
+         });
+
          // Refresh the classes
          currentImage.removeClass('current');
          $('.poster-img[data-nb="'+newLevel+'"]').toggleClass('current');
-         
+
          if(newLevel == 1){
              minusBtn.addClass('hidden');
          }
          if(newLevel ==  $('.images-wrapper .poster-img').length){
              plusBtn.addClass('hidden');
          }
-
-     });
+     }
 
 });
