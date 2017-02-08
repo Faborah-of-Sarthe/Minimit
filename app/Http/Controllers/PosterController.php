@@ -96,7 +96,7 @@ class PosterController extends Controller
     {
         $poster = Poster::inRandomOrder()->first();
         // $poster = Poster::find(6);
-        $details = $this->getPosterDetails($poster);
+        $details = $poster->getPosterDetails();
 
         if ($request->ajax()) {
             return View::make('poster.poster', compact('poster', 'details'));
@@ -105,13 +105,5 @@ class PosterController extends Controller
         return View::make('poster.random', compact('poster', 'details'));
     }
 
-    public function getPosterDetails(Poster $poster)
-    {
-        $details = [];
-        $details['images'] = $poster->images()->orderBy('level')->get();
-        $details['oeuvre'] = $poster->oeuvre;
-        $details['author'] = $poster->user->name;
 
-        return $details;
-    }
 }

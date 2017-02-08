@@ -21,6 +21,10 @@ Route::model('poster', 'App\Poster');
 Route::get('random', ['as' => 'poster.random', 'uses' => "PosterController@randomPoster"]);
 Route::post('oeuvre/search', ['as' => 'oeuvre.search', 'uses' => 'OeuvreController@search']);
 
+Route::resource('selection', 'SelectionController');
+Route::model('selection', 'App\Selection');
+Route::get('selection-navigation', ['as' => 'selection.navigation', 'uses' => 'SelectionController@navigation']);
+
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::resource('oeuvre', 'OeuvreController', ['except' => ['show']]);
     Route::model('oeuvre', 'App\Oeuvre');

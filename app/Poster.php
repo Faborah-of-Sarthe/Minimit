@@ -39,4 +39,17 @@ class Poster extends Model
        return $this->hasMany("App\Image");
     }
 
+    /**
+     * Return the poster details
+     * @return array $details
+     */
+    public function getPosterDetails()
+    {
+        $details = [];
+        $details['images'] = $this->images()->orderBy('level')->get();
+        $details['oeuvre'] = $this->oeuvre;
+        $details['author'] = $this->user->name;
+
+        return $details;
+    }
 }

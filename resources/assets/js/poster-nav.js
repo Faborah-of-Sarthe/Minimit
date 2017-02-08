@@ -78,7 +78,7 @@ $(document).ready(function() {
       * Switch between the different posters of a selection, or to a random poster
       */
      function switchPoster(posterId, selectionId) {
-         var params = { posterId, selectionId };
+         var params = { 'posterId': posterId, 'selectionId': selectionId };
 
          $.ajax({
              url: ajaxPosterUrls.switchposter,

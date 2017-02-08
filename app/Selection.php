@@ -45,7 +45,7 @@ class Selection extends Model
      */
      public function posters()
      {
-         return $this->belongsToMany("App\Poster")->withPivot('order');
+         return $this->belongsToMany("App\Poster")->withPivot('order')->orderBy('order');
      }
 
     /**
