@@ -6,6 +6,11 @@
                 alt="{!! trans('poster.poster_by', ['author' => $details['author']]) !!}"
                 class="poster-img loading {{ ($key == 0) ? 'current' : '' }}">
         @endforeach
+        <div class="solution invisible">
+            <span class="title current-version">{{ $poster->oeuvre->title_ov }}</span>
+            <span class="title original-version">{{ $poster->oeuvre->getTitleAttribute() }}</span>
+            <span class="year">{{  $poster->oeuvre->year }}</span>
+        </div>
     </div>
 </div>
 <div class="controls">
@@ -16,3 +21,4 @@
     <div class="switch-level minus hidden"><span>-</span></div>
     <div class="switch-level plus"><span>+</span></div>
 </div>
+<div class="show-solution"><span>{!! trans('poster.show-solution') !!}</span></div>

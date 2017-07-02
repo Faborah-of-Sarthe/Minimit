@@ -17,5 +17,6 @@ return [
     'next_button' => 'Suivant',
     'poster_by' => 'Poster par :author',
     'prev_button' => 'Précédent',
+    'show-solution' => 'Solution',
 
 ];

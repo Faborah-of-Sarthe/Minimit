@@ -11,8 +11,8 @@ return [
     |
     */
 
-    'final_fav_me' => "Vous avez apprécié cette sélection ? Mettez-la en favori !",
-    'final_message' => "Merci d'avoir joué ! Nous espérons que cette sélection vous a plu.",
-    'final_please_note' => "Notez cette sélection : ",
+    'final_fav_me' => "Did you like this selection? Put in your favorites!",
+    'final_message' => "Thank you for playing! We hope that you liked this selection.",
+    'final_please_note' => "Rate this selection: ",
 
 ];

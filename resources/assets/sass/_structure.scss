@@ -14,6 +14,11 @@ img{
     border: 0;
 }
 
+.invisible{
+    pointer-events: none;
+    opacity: 0;
+}
+
 header{
     display: none;
 }
@@ -22,8 +27,17 @@ header{
     .images-wrapper {
         overflow: hidden;
         height: 100%;
+        .solution{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
     }
     .images-frame{
+        position: relative;
+        display: inline-block;
         transition: transform .5s ease;
     }
     .poster-img{

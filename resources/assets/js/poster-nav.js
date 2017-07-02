@@ -3,6 +3,11 @@ $(document).ready(function() {
     // Save the animation state
     isAnimating = false;
 
+    // Desktop solution revelation event
+    $(document).on('click', '.show-solution', function() {
+        $('.solution').toggleClass('invisible');
+    });
+
     // Desktop events for levels
      $(document).on('click', '.switch-level', function(event){
          var direction = ($(this).hasClass('minus')) ? 'minus' : 'plus';
@@ -18,7 +23,6 @@ $(document).ready(function() {
 
       // Desktop keyboard navigation
       $(document).on('keyup', function(e){
-          if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
           switch (e.keyCode) {
               case 37:
                 if ($('.previous.switch-poster').attr('data-id') != '') {
@@ -26,9 +30,7 @@ $(document).ready(function() {
                 }
                   break;
               case 39:
-                if ($('.next.switch-poster').attr('data-id') != '') {
                     $('.next.switch-poster').trigger('click');
-                }
                   break;
               case 38:
                 if (!$('.minus.switch-level').hasClass('hidden')) {
