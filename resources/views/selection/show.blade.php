@@ -9,7 +9,8 @@
 @section('footer')
     <script type="text/javascript">
         ajaxPosterUrls = {
-            switchposter: "{{ route('selection.navigation') }}"
+            switchposter: "{{ route('selection.navigation') }}",
+            final: "{{ route('selection.final') }}"
         }
     </script>
 @endsection

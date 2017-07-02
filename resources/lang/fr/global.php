@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'back_home' => 'Retour à l\'accueil',
     'backlink' => 'Retour',
     'cancel_btn' => 'Annuler',
     'delete' => 'Supprimer',

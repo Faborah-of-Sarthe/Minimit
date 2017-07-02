@@ -11,6 +11,7 @@ return [
     |
     */
 
+    'back_home' => 'Back home',
     'backlink' => 'Go back',
     'cancel_btn' => 'Cancel',
     'delete_btn' => 'Delete',

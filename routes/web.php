@@ -24,6 +24,7 @@ Route::post('oeuvre/search', ['as' => 'oeuvre.search', 'uses' => 'OeuvreControll
 Route::resource('selection', 'SelectionController');
 Route::model('selection', 'App\Selection');
 Route::get('selection-navigation', ['as' => 'selection.navigation', 'uses' => 'SelectionController@navigation']);
+Route::get('selection-final', ['as' => 'selection.final', 'uses' => 'SelectionController@finalPage']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::resource('oeuvre', 'OeuvreController', ['except' => ['show']]);

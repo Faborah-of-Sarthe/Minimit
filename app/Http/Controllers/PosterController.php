@@ -95,7 +95,6 @@ class PosterController extends Controller
     public function randomPoster(Request $request)
     {
         $poster = Poster::inRandomOrder()->first();
-        // $poster = Poster::find(6);
         $details = $poster->getPosterDetails();
 
         if ($request->ajax()) {

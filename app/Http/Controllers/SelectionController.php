@@ -87,14 +87,22 @@ class SelectionController extends Controller
         // If there is no next poster, we are on the last poster, so we display
         // the final page
         if (!isset($next->id)) {
-            //TODO RETURN TO ENDING PAGE & DELETE THE LINE BELOW
-            $idNext = '';
+            $idNext = 'final';
         } else {
             $idNext = $next->id;
         }
         $idPrev = (isset($prev->id)) ? $prev->id : '';
 
         return View::make('poster.poster', compact('poster', 'details', 'idPrev', 'idNext', 'idSelection'));
+    }
+
+    /**
+     * Show the final page of a selection
+     */
+    public function finalPage(Request $request)
+    {
+        $idSelection = $request->selectionId;
+        return View::make('selection.final', compact('idSelection'));
     }
 
     /**

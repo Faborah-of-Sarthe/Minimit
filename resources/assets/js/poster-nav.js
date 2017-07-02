@@ -79,9 +79,11 @@ $(document).ready(function() {
       */
      function switchPoster(posterId, selectionId) {
          var params = { 'posterId': posterId, 'selectionId': selectionId };
-
+         var controllerUrl = (params.posterId == 'final') ?
+            ajaxPosterUrls.final :
+            ajaxPosterUrls.switchposter;
          $.ajax({
-             url: ajaxPosterUrls.switchposter,
+             url: controllerUrl,
              data: params,
              beforeSend: function() { $('.poster-wrapper').addClass('loading'); },
              complete: function() {
