@@ -16,6 +16,35 @@ $(document).ready(function() {
           switchPoster(posterId, selectionId);
       });
 
+      // Desktop keyboard navigation
+      $(document).on('keyup', function(e){
+          if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+          switch (e.keyCode) {
+              case 37:
+                if ($('.previous.switch-poster').attr('data-id') != '') {
+                    $('.previous.switch-poster').trigger('click');
+                }
+                  break;
+              case 39:
+                if ($('.next.switch-poster').attr('data-id') != '') {
+                    $('.next.switch-poster').trigger('click');
+                }
+                  break;
+              case 38:
+                if (!$('.minus.switch-level').hasClass('hidden')) {
+                    $('.minus.switch-level').trigger('click');
+                }
+                  break;
+              case 40:
+                if (!$('.plus.switch-level').hasClass('hidden')) {
+                    $('.plus.switch-level').trigger('click');
+                }
+                  break;
+              default:
+
+          }
+      });
+
      /**
      * Switch between the different levels on a poster
      */
