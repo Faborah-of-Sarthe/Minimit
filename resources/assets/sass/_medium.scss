@@ -1,29 +1,37 @@
-header{
-    height: 80px;
-    background: $header-color;
+body .mobile-hidden {
     display: block;
+}
+body .desktop-hidden {
+    display: none;
+}
 
-    .container{
-        display: flex;
-        justify-content: space-between;
-        height: 100%;
-        li{
-            display: inline-block;
-        }
-    }
-
+header{
+    background: yellow;
     .header-part{
-        display: flex;
         align-items: center;
+        display: flex;
         a{
             padding: 0 .25em;
         }
+        &.desktop-hidden {
+            display: none;
+        }
     }
-    .header-left{
-        padding-left: 2em;
+    .header-left,
+    .header-right {
+        padding: 0 0.5em;
     }
-    .header-right{
-        padding-right: 2em;
+    .menu {
+        flex-direction: row;
+        .account {
+            display: block;
+            width: 50px;
+            height: 50px;
+            text-indent: -9999px;
+        }
+        .mickey {
+            background: url('../images/mickey.png');
+        }
     }
 }
 

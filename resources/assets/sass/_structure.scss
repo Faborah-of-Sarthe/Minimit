@@ -4,24 +4,113 @@
     margin: 0;
 }
 body{
+    background: $body-bg;
+    font-family: $main-font;
+    font-size: 16px;
+}
+li {
+    list-style-type: none;
 }
 .hidden {
     display:none;
 }
-img{
+img {
     max-width: 100%;
     width: auto;
     border: 0;
 }
 
-.invisible{
+.invisible {
     pointer-events: none;
     opacity: 0;
 }
 
-header{
+.mobile-hidden {
     display: none;
 }
+
+
+/**
+ *  HEADER
+ */
+header{
+    background: $header-color;
+    padding: 0 1rem;
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 100%;
+    }
+    .logo img {
+        /** MASK IMAGE: NOT COMPATIBLE ALL BROWSERS YET
+        mask-image: url('../images/logo.svg');
+        **/
+        max-height: 50px;
+    }
+    .burger-menu {
+        padding: 0.5em;
+        cursor: pointer;
+        .icon {
+            position: relative;
+            display: block;
+            top: 1em;
+            width: 2em;
+            height: 0.25em;
+            background: #707070;
+            border-radius: 5px;
+            &:after,
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                width: 2em;
+                height: 0.25em;
+                background: #707070;
+                border-radius: 5px;
+            }
+            &:after {
+                top: -0.6em;
+            }
+            &:before {
+                top: 0.6em;
+            }
+        }
+    }
+    .language-switcher {
+        padding-left: 1em;
+        li {
+            display: inline-block;
+        }
+        a {
+            display: block;
+            text-indent: -5000px;
+            height: 1.5em;
+            width: 1.5em;
+            background-image: url('../images/country-flags.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .fr {
+            background-position: 100% 0;
+        }
+        .en {
+            background-position: 0 0;
+        }
+    }
+    .menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
+
+
+/**
+ * POSTER DETAILS
+ */
 .poster-wrapper {
     text-align: center;
     .images-wrapper {

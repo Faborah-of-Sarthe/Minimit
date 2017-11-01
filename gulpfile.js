@@ -1,5 +1,7 @@
 const elixir = require('laravel-elixir');
 
+require('laravel-elixir-image-optimize');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -17,4 +19,5 @@ elixir(mix => {
         '../../../node_modules/jquery/dist/jquery.min.js',
         'resources/assets/js'
     ], 'public/js/app.js');
+    //mix.imageOptimize('resources/assets/images','public/images');
 });
