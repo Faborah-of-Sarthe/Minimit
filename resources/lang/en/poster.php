@@ -17,6 +17,7 @@ return [
     'next_button' => 'Next',
     'poster_by' => 'Poster by :author ',
     'prev_button' => 'Previous',
+    'random_poster_title' => 'Random poster',
     'show-solution' => 'Solution',
 
 ];

@@ -41,8 +41,9 @@
                 </div>
                 <div class="header-right header-part burger-menu desktop-hidden">
                     <span class="icon"></span>
+                    <span class="cross" style="display:none;"></span>
                 </div>
-                <div class="header-right header-part mobile-hidden">
+                <div class="header-right header-part menu-content">
                     <ul class="language-switcher desktop-hidden">
                         <li><a class="fr" href="{{ action('LanguageController@switch', ['fr']) }}">Français</a></li>
                         <li><a class="en" href="{{ action('LanguageController@switch', ['en']) }}">English</a></li>

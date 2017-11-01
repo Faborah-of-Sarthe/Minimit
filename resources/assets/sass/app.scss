@@ -6,6 +6,10 @@
 @import "variables";
 @import "structure";
 
+@media screen and (max-width: 40em) {
+    @import "mobile";
+}
+
 @media screen and (min-width: 40em) {
     @import "medium";
 }

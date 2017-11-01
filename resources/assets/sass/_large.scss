@@ -1,4 +1,25 @@
 header {
-    background: red;
+  //background: red; //dev purposes
+  height: 5em;
 
+  .logo img {
+    max-height: 5em;
+  }
+  .header-left,
+  .header-right {
+    padding: 0 1em;
+  }
+  .menu-content .menu {
+    a {
+      padding: 0 1.5em;
+    }
+    .account {
+      width: 3em;
+      height: 3em;
+      margin-left: 1.5em;
+    }
+    .mickey {
+      background-size: 3em;
+    }
+  }
 }

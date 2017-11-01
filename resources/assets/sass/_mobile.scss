@@ -1,0 +1,86 @@
+
+/**
+ *  HEADER
+ */
+header {
+  .burger-menu {
+    padding: 0.5em;
+    cursor: pointer;
+    .icon {
+      position: relative;
+      display: block;
+      top: 1em;
+      width: 2em;
+      height: 0.25em;
+      background: $header-links-color;
+      border-radius: 5px;
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 2em;
+        height: 0.25em;
+        background: $header-links-color;
+        border-radius: 5px;
+      }
+      &:after {
+        top: -0.6em;
+      }
+      &:before {
+        top: 0.6em;
+      }
+    }
+  }
+  .menu-content {
+    display: block;
+    position: absolute;
+    background: $header-links-color;
+    top: 3.5em;
+    z-index: 3456;
+    right: 0;
+    transform: translate(100%,0); //invisble yet
+    bottom: 0;
+    padding: 2em;
+    transition: all 0.5s ease;
+    .language-switcher {
+      text-align: center;
+      padding: 0;
+      margin-bottom: 2em;
+      a { margin: 0 0.5em; }
+    }
+    .menu a {
+      color: white;
+      font-size: 1.3em;
+      padding: 1em 0;
+      display: block;
+    }
+  }
+  .menus li {
+    transform: translate(50%,0);
+    transition: all ease .3s;
+  }
+  @for $i from 1 through 5 {
+    .menus li:nth-child(#{$i} ) {
+      transition-delay: $i * 0.1s;
+    }
+  }
+  // When mobile menu is open
+  .header-part.menu-content.open {
+    left: 0;
+    transform: translate(0,0);
+    transition: all 0.5s ease;
+    .menus li {
+      transform: translate(0);
+    }
+  }
+  .burger-menu .cross {
+    position: relative;
+    display: block;
+    top: 0.1em;
+    background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 45%, $header-links-color 45%, $header-links-color 55%, transparent 55%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 45%, $header-links-color 45%, $header-links-color 55%, transparent 55%, transparent 100%);
+    height: 2em;
+    width: 2em;
+    transition: all 0.3s ease;
+  }
+}

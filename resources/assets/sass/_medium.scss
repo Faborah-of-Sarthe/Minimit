@@ -6,7 +6,8 @@ body .desktop-hidden {
 }
 
 header{
-    background: yellow;
+    //background: yellow; //dev purposes
+    height: 4em;
     .header-part{
         align-items: center;
         display: flex;
@@ -17,20 +18,34 @@ header{
             display: none;
         }
     }
+    .logo img {
+        max-height: 4em;
+    }
     .header-left,
     .header-right {
         padding: 0 0.5em;
     }
-    .menu {
-        flex-direction: row;
-        .account {
-            display: block;
-            width: 50px;
-            height: 50px;
-            text-indent: -9999px;
-        }
-        .mickey {
-            background: url('../images/mickey.png');
+    .menu-content {
+        .menu {
+            flex-direction: row;
+            text-align: center;
+            a {
+                padding: 0 0.5em;
+                display: block;
+                color: $header-links-color;
+                font-size: 1em;
+            }
+            .account {
+                width: 2em;
+                height: 2em;
+                margin-left: 0.5em;
+                text-indent: -9000px;
+                overflow: hidden;
+            }
+            .mickey {
+                background: url('../images/mickey.png') no-repeat;
+                background-size: 2em;
+            }
         }
     }
 }

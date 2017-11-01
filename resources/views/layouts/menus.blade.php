@@ -1,4 +1,4 @@
-<nav class="header-right header-part menus">
+<nav class="menus">
     <ul class="menu">
         <li><a class="selections" href="#">{!! trans('global.list_menu') !!}</a></li>
         <li><a class="random" rel="nofollow" href="{{ route('poster.random') }}">{!! trans('global.random_menu') !!}</a></li>
