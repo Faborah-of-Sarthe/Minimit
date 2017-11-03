@@ -14,5 +14,9 @@ return [
     'final_fav_me' => "Vous avez apprécié cette sélection ? Mettez-la en favori !",
     'final_message' => "Merci d'avoir joué ! Nous espérons que cette sélection vous a plu.",
     'final_please_note' => "Notez cette sélection : ",
-
+    'too_easy' => "Trop facile ?",
+    'too_hard' => "Trop dur ?",
+    'searching_for' => "On cherche ",
+    'original' => "Original",
+    'it_was' => "C'était",
 ];

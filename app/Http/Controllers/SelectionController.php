@@ -49,13 +49,16 @@ class SelectionController extends Controller
     public function show(Selection $selection)
     {
         $posters     = $selection->posters->values();
+        $count       = count($posters);
         $poster      = $posters->get(0);
         $next        = $posters->get(1);
         $details     = $poster->getPosterDetails();
         $idNext      = $next->id;
         $idSelection = $selection->id;
+        $current     = 1;
 
-        return View::make('selection.show', compact('poster', 'details', 'idNext', 'idSelection'));
+
+        return View::make('selection.show', compact('poster', 'count','details', 'idNext', 'idSelection', 'selection', 'current'));
     }
 
     /**
@@ -63,7 +66,7 @@ class SelectionController extends Controller
      */
     public function navigation(Request $request)
     {
-        // Return an error an ajax parameter is missing
+        // Return an error if an ajax parameter is missing
         if(empty($request->posterId) || empty($request->selectionId)){
             $message = trans('poster.ajax_error');
             return '<div class="error">'.$message.'</div>';
@@ -71,9 +74,11 @@ class SelectionController extends Controller
 
         $idSelection = $request->selectionId;
         $selection = Selection::find($idSelection);
+        $count = $selection->posters()->count();
 
         // Retrieve the poster to display with the relationship pivot attributes
-        $poster = $selection->posters()->where('poster_id', $request->posterId)->first();
+        $poster = $selection->posters()->where('poster_id', $request->posterId)->withPivot('order')->first();
+        $current = $poster->pivot->order;
         $details = $poster->getPosterDetails();
 
         // Retrieve the previous and next posters based on pivot order
@@ -93,7 +98,7 @@ class SelectionController extends Controller
         }
         $idPrev = (isset($prev->id)) ? $prev->id : '';
 
-        return View::make('poster.poster', compact('poster', 'details', 'idPrev', 'idNext', 'idSelection'));
+        return View::make('poster.poster', compact('poster','count', 'details', 'idPrev', 'idNext', 'idSelection', 'selection', 'current'));
     }
 
     /**
