@@ -14,7 +14,9 @@
             "{{ $selection->title or trans('poster.random_poster_title') }}"
         </div>
         @if(isset($selection))
-            <span class="colorized">{{ $current }}</span> / {{ $count }}
+            <div class="count">
+                <span class="colorized">{{ $current }}</span>/<span>{{ $count }}</span>
+            </div>
         @endif
     </div>
     <div class="search-infos">
@@ -25,7 +27,7 @@
             <div class="colorized switch-level plus"><span>{{ trans('selection.too_hard') }}</span></div>
         </div>
     </div>
-    <div class="solution invisible">
+    <div class="solution-wrapper not-visible">
         <div class="title current-version">
             {{ trans('selection.it_was') }} <span class="colorized">
                 {{ $poster->oeuvre->getTitleAttribute() }}
@@ -34,11 +36,24 @@
         <div class="title original-version">
             {{ trans('selection.original') }} : {{ $poster->oeuvre->title_ov }} - <span class="year">{{  $poster->oeuvre->year }}</span>
         </div>
-
+        <div class="action-wrapper">
+            <div class="close-solution btn">
+                <span>{!! trans('poster.close-solution') !!}</span>
+            </div>
+        </div>
     </div>
     <div class="controls">
-        <div data-id="{{ $idPrev or '' }}" data-selection="{{ $idSelection or '' }}" class="previous switch-poster">{!! trans('poster.prev_button') !!}</div>
-        <div class="show-solution"><span>{!! trans('poster.show-solution') !!}</span></div>
-        <div data-id="{{ $idNext or '' }}" data-selection="{{ $idSelection or '' }}" class="next switch-poster">{!! trans('poster.next_button') !!}</div>
+        <div class="action-placeholder">
+            <div data-id="{{ $idPrev or '' }}" data-selection="{{ $idSelection or '' }}" class="previous switch-poster btn colorized">{!! trans('poster.prev_button') !!}</div>
+        </div>
+        <div class="action-placeholder">
+            <div class="show-solution btn">
+                <span>{!! trans('poster.show-solution') !!}</span>
+            </div>
+        </div>
+        <div class="action-placeholder">
+            <div data-id="{{ $idNext or '' }}" data-selection="{{ $idSelection or '' }}"
+                 class="next switch-poster colorized btn">{!! trans('poster.next_button') !!}</div>
+        </div>
     </div>
 </div>

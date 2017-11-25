@@ -19,5 +19,5 @@ return [
     'prev_button' => 'Précédent',
     'random_poster_title' => 'Poster au hasard',
     'show-solution' => 'Solution',
-
+    'close-solution' => "Fermer",
 ];

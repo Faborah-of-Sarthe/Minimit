@@ -84,3 +84,35 @@ header {
     transition: all 0.3s ease;
   }
 }
+
+.poster-wrapper{
+  .images-wrapper{
+    max-height: 90vh;
+  }
+  .solution-wrapper{
+    position: absolute;
+    background: $body-bg;
+    padding: 2rem 1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: transform ease .3s;
+    .action-wrapper{
+      padding-top: 1rem;
+    }
+    .close-solution{
+      padding: 1rem;
+      display: inline-block;
+    }
+    &>* {
+      transition: transform ease .3s;
+
+      transition-delay: .1s;
+    }
+  }
+  .not-visible,
+  .not-visible > *
+  {
+    transform:translateY(100%);
+  }
+}

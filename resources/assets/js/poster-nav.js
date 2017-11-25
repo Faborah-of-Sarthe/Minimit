@@ -4,8 +4,8 @@ $(document).ready(function() {
     isAnimating = false;
 
     // Desktop solution revelation event
-    $(document).on('click', '.show-solution', function() {
-        $('.solution').toggleClass('invisible');
+    $(document).on('click', '.show-solution, .close-solution', function() {
+        $('.solution-wrapper').toggleClass('not-visible');
     });
 
     // Desktop events for levels
@@ -33,12 +33,12 @@ $(document).ready(function() {
                     $('.next.switch-poster').trigger('click');
                   break;
               case 38:
-                if (!$('.minus.switch-level').hasClass('hidden')) {
+                if (!$('.minus.switch-level').hasClass('hidden') && !$('.hints').hasClass('hidden')) {
                     $('.minus.switch-level').trigger('click');
                 }
                   break;
               case 40:
-                if (!$('.plus.switch-level').hasClass('hidden')) {
+                if (!$('.plus.switch-level').hasClass('hidden')  && !$('.hints').hasClass('hidden')) {
                     $('.plus.switch-level').trigger('click');
                 }
                   break;
