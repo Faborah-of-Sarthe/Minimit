@@ -12,7 +12,7 @@ class LanguageController extends Controller
      * Switch the locale to the provided language
      * @param string $lang
      */
-    public function switch($lang)
+    public function switchLang($lang)
     {
         $cookie = Cookie::forever('language', $lang);
         Session::put('locale', $lang);

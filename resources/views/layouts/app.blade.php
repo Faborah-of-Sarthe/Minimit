@@ -35,8 +35,8 @@
                         <img src="{{ URL::asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}">
                     </a>
                     <ul class="language-switcher mobile-hidden">
-                        <li><a class="fr" href="{{ action('LanguageController@switch', ['fr']) }}">Français</a></li>
-                        <li><a class="en" href="{{ action('LanguageController@switch', ['en']) }}">English</a></li>
+                        <li><a class="fr" href="{{ action('LanguageController@switchLang', ['fr']) }}">Français</a></li>
+                        <li><a class="en" href="{{ action('LanguageController@switchLang', ['en']) }}">English</a></li>
                     </ul>
                 </div>
                 <div class="header-right header-part burger-menu desktop-hidden">
@@ -45,8 +45,8 @@
                 </div>
                 <div class="header-right header-part menu-content">
                     <ul class="language-switcher desktop-hidden">
-                        <li><a class="fr" href="{{ action('LanguageController@switch', ['fr']) }}">Français</a></li>
-                        <li><a class="en" href="{{ action('LanguageController@switch', ['en']) }}">English</a></li>
+                        <li><a class="fr" href="{{ action('LanguageController@switchLang', ['fr']) }}">Français</a></li>
+                        <li><a class="en" href="{{ action('LanguageController@switchLang', ['en']) }}">English</a></li>
                     </ul>
                     @include('layouts.menus')
                 </div>

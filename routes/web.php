@@ -12,7 +12,7 @@
 */
 
 Auth::routes();
-Route::get('switch-lang/{lang}', 'LanguageController@switch');
+Route::get('switch-lang/{lang}', 'LanguageController@switchLang');
 Route::get('/', 'HomeController@index');
 Route::get('account', ['as' => 'account.dashboard', 'uses' => 'AccountController@dashboard']);
 
