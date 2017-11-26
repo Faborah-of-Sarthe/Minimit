@@ -81,7 +81,9 @@
 
 
         <div class="content">
-            @yield('content')
+            <div class="content-wrapper">
+                @yield('content')
+            </div>
         </div>
 
 

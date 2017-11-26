@@ -23,8 +23,8 @@
         {{-- TODO Remplacer par le type d'oeuvre et ajouter l'icône --}}
         <div class="main">{{ trans('selection.searching_for') }} <span class="colorized">XXX</span></div>
         <div class="hints {{ ($details['images']->count() == 1) ? 'hidden' : '' }}">
-            <div class="colorized switch-level minus hidden"><span>{{ trans('selection.too_easy') }}</span></div>
-            <div class="colorized switch-level plus"><span>{{ trans('selection.too_hard') }}</span></div>
+            <div class="colorized-bg switch-level minus hidden"><span>{{ trans('selection.too_easy') }}</span></div>
+            <div class="colorized-bg switch-level plus"><span>{{ trans('selection.too_hard') }}</span></div>
         </div>
     </div>
     <div class="solution-wrapper not-visible">

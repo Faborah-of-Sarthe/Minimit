@@ -5,6 +5,10 @@ body .desktop-hidden {
     display: none;
 }
 
+.content-wrapper {
+    margin: 0 auto;
+    max-width: 1100px;
+}
 header{
     //background: yellow; //dev purposes
     height: 4em;
@@ -51,8 +55,100 @@ header{
 }
 
 .poster-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    &>div {
+        flex:1;
+    }
+    .infos-wrapper{
+        text-align: left;
+        order:0;
+        position: relative;
+    }
+    .images-wrapper{
+        order:1;
+        padding: .7rem;
+    }
     .images-wrapper,
     .poster-img {
         max-height: calc(100vh - 80px);
     }
+    .search-infos .main,
+    .selection-name {
+        display: inherit;
+    }
+    .selection-name
+    {
+        font-style: italic;
+    }
+
+    .upper-infos{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: .7rem 0;
+        align-items:center;
+    }
+    .count{
+        font-size: .8rem;
+    }
+    .search-infos{
+        padding: 3rem 0;
+    }
+    .search-infos .main{
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .close-solution{
+        display: none;
+    }
+    .solution-wrapper {
+        padding: 3rem 0;
+        transition: ease opacity .3s;
+        font-weight: 600;
+        & > *
+        {
+          transition: ease transform .3s;
+        }
+    }
+    .current-version {
+        font-size: 2rem;
+    }
+
+    .original-version {
+        font-size: 1.2rem;
+    }
+    .controls {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom:0;
+        padding: 3rem 0;
+    }
+
+    .not-visible
+    {
+        opacity: 0;
+        & > *
+        {
+          transform: translateY(50%);
+        }
+    }
+    .hints {
+        padding: .7rem 0;
+    }
+}
+
+.switch-level {
+    display: inline-block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #FFF;
+    font-style: italic;
+    font-size: .8rem;
+    padding: .3rem;
+    cursor: pointer;
 }
