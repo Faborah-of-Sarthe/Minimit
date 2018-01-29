@@ -16,6 +16,7 @@
             {!! trans('oeuvre.empty_list') !!}
         @endforelse
     </ul>
+    {{ $oeuvres->links() }}
 @endsection
 
 @section('footer')

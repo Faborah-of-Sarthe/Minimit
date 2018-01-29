@@ -17,7 +17,7 @@ class OeuvreController extends Controller
      */
     public function index()
     {
-        $oeuvres = Oeuvre::all();
+        $oeuvres = Oeuvre::paginate(25);
         return View::make('admin.oeuvre.index', compact('oeuvres'));
     }
 
@@ -42,7 +42,7 @@ class OeuvreController extends Controller
         $this->validate($request, [
             'title_ov' => 'required|max:255',
             'title_fr' => 'required|max:255',
-            'title_fr' => 'required|max:255',
+            'title_en' => 'required|max:255',
             'year' => 'required|numeric',
         ]);
         $oeuvre = new Oeuvre;
@@ -74,7 +74,7 @@ class OeuvreController extends Controller
         $this->validate($request, [
             'title_ov' => 'required|max:255',
             'title_fr' => 'required|max:255',
-            'title_fr' => 'required|max:255',
+            'title_en' => 'required|max:255',
             'year' => 'required|numeric',
         ]);
         if($request->active == null){
