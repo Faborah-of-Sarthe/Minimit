@@ -30,7 +30,8 @@ class PosterController extends Controller
      */
     public function create()
     {
-        return View::make('poster.add');
+        $images = [];
+        return View::make('poster.add', compact('images'));
     }
 
     /**
@@ -63,7 +64,7 @@ class PosterController extends Controller
      */
     public function edit(Poster $poster)
     {
-        //
+        return View::make('poster.edit', compact('poster'));
     }
 
     /**

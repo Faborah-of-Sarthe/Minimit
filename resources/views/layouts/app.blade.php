@@ -79,8 +79,7 @@
             </div>
         @endif
 
-
-        <div class="content">
+        <div class="content @hasSection('container-class')  @yield('container-class') @endif">
             <div class="content-wrapper">
                 @yield('content')
             </div>

@@ -1,10 +1,9 @@
 @extends('layouts.app')
-@section('title', trans('poster.add_title'))
+@section('title', trans('poster.edit_title'))
 @section('backlink', 'poster.index')
 @section('container-class', 'poster-update')
-
 @section('content')
-    {!! Form::open(['route' => 'poster.store', 'method' => 'POST']) !!}
+    {!! Form::model($poster, ['route' => ['poster.update', $poster->id], 'method' => 'PUT']) !!}
         @include('poster.form')
     {!! Form::close() !!}
 @endsection

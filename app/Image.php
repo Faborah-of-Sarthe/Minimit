@@ -14,7 +14,11 @@ class Image extends Model
     protected $fillable = [
         'filepath', 'level',
     ];
-    
+
+    public $prefixPathImages = 'uploads/posters/HD/';
+    public $prefixPathImagesLight = 'uploads/posters/LD/';
+    public $prefixPathImagesThumb = 'uploads/posters/thumb/';
+
     /**
      * Get the poster for one image
      */
@@ -22,4 +26,9 @@ class Image extends Model
      {
          return $this->belongsTo("App\Poster");
      }
+
+    public function getThumbnailPath()
+    {
+        return $this->prefixPathImagesThumb . $this->filepath;
+    }
 }
