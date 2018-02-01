@@ -12,7 +12,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'filepath', 'level',
+        'filepath', 'level', 'poster_id'
     ];
 
     public $prefixPathImages = 'uploads/posters/HD/';
@@ -27,8 +27,27 @@ class Image extends Model
          return $this->belongsTo("App\Poster");
      }
 
+    /**
+     * Return the path for the "Thumbnail" version of an image
+     */
     public function getThumbnailPath()
     {
         return $this->prefixPathImagesThumb . $this->filepath;
+    }
+
+    /**
+     * Return the path for the "Fullsize" version of an image
+     */
+    public function getFullPath()
+    {
+        return $this->prefixPathImages . $this->filepath;
+    }
+
+    /**
+     * Return the path for the "Light" version of an image
+     */
+    public function getLightPath()
+    {
+        return $this->prefixPathImagesLight . $this->filepath;
     }
 }

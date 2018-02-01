@@ -98,8 +98,8 @@ return [
     */
 
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'image' => [
+            'image' => 'Vous devez envoyer une image',
         ],
     ],
 

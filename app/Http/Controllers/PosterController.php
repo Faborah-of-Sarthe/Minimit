@@ -31,7 +31,8 @@ class PosterController extends Controller
     public function create()
     {
         $images = [];
-        return View::make('poster.add', compact('images'));
+        $poster = null;
+        return View::make('poster.add', compact('images', 'poster'));
     }
 
     /**
