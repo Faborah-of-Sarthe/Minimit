@@ -58,12 +58,12 @@ class Image extends Model
      */
     public function delete()
     {
-        if(File::isFile($this->getFullPath()))
-            File::delete($this->getFullPath());
-        if(File::isFile($this->getLightPath()))
-            File::delete($this->getLightPath());
-        if(File::isFile($this->getThumbnailPath()))
-            File::delete($this->getThumbnailPath());
+        if(File::isFile(public_path(). '/' . $this->getFullPath()))
+            File::delete(public_path(). '/' . $this->getFullPath());
+        if(File::isFile(public_path(). '/' . $this->getLightPath()))
+            File::delete(public_path(). '/' . $this->getLightPath());
+        if(File::isFile(public_path(). '/' . $this->getThumbnailPath()))
+            File::delete(public_path(). '/' . $this->getThumbnailPath());
 
         parent::delete();
     }
