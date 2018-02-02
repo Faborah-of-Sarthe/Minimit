@@ -35,6 +35,7 @@ class ImageController extends Controller
             File::makeDirectory($this->pathImagesThumb,  0775, true);
 
         $this->middleware('auth', ['except' => ['show']]);
+        $this->middleware('owner:image', ['only' => ['destroy']]);
     }
 
 
@@ -49,7 +50,7 @@ class ImageController extends Controller
             return false;
 
         $this->validate($request, [
-            'image' => 'image|dimensions:max_width=1920'
+            'image' => 'image|dimensions:max_width=3020,min_width=700,min_height=1000'
         ]);
 
         $image = $request->file('image');
@@ -58,7 +59,7 @@ class ImageController extends Controller
 
         // Saving "Full size" image
         $image_full = Image::make($image);
-        $image_full->resize(1920, null, function ($constraint) {
+        $image_full->fit(1050, 1500, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
@@ -67,7 +68,7 @@ class ImageController extends Controller
 
         // Saving "Light size" image
         $image_light = Image::make($image);
-        $image_light->resize(1024, null, function ($constraint) {
+        $image_light->fit(700, 1000, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
@@ -76,7 +77,7 @@ class ImageController extends Controller
 
         // Saving "Thumbnail" image
         $image_thumb = Image::make($image);
-        $image_thumb->fit(200);
+        $image_thumb->fit(200, 285);
         $image_thumb->save($this->pathImagesThumb.$filename);
 
         if(isset($request->poster_id) && null !== $request->poster_id && '' !== $request->poster_id) {
@@ -92,6 +93,22 @@ class ImageController extends Controller
             'level' => $level
         ]);
 
-        return View::make('poster.singleimage', compact('image'));
+        $view = View::make('poster.singleimage', compact('image'));
+
+        return json_encode($view->render());
+    }
+
+    /**
+     * Destroy the provided resource
+     * @param \App\Image $image
+     */
+    public function destroy(Request $request, \App\Image $image)
+    {
+        if (!$request->ajax())
+            return false;
+
+        $image->delete();
+
+        return json_encode($image->id);
     }
 }

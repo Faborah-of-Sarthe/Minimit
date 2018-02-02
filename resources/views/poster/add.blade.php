@@ -4,7 +4,9 @@
 @section('container-class', 'poster-update')
 
 @section('content')
-    {!! Form::open(['route' => 'poster.store', 'method' => 'POST', 'files' => true, 'class' => 'form-poster']) !!}
+    {!! Form::open(['route' => 'poster.store', 'method' => 'POST']) !!}
         @include('poster.form')
-    {!! Form::close() !!}
+@endsection
+@section('footer')
+    @include('layouts.confirm-popup')
 @endsection

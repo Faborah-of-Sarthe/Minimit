@@ -16,5 +16,7 @@
     "vue-resource": "^1.0.3",
     "laravel-elixir-image-optimize": "1.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sortablejs": "^1.7.0"
+  }
 }

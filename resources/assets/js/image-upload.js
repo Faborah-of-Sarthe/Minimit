@@ -1,32 +1,73 @@
 $(document).ready(function() {
     if($('.poster-update').length) {
         var inputUpload = $('.input-file');
-        var submitBtn = $('.upload-btn');
+        var formUpload = $('.form-poster');
+        var imageContainer = $('.images-list .container');
         errorsContainer = $('.images .errors');
+        imageids = $('.image-ids');
 
 
-        submitBtn.click(function () {
+        formUpload.submit(function (e) {
+            e.preventDefault();
             var file = inputUpload.val();
             errorsContainer.html('');
             if (file) {
                 var fileData =  new FormData($('.form-poster').get(0));
-                console.log(fileData);
                 $.ajax({
-                    method: 'POST',
-                    url: inputUpload.data('href'),
+                    method: $(this).prop('method'),
+                    url: $(this).prop('action'),
                     dataType: 'json',
                     data: fileData,
                     processData: false,
                     contentType: false
                 }).done(function (data) {
-                    console.log(data);
+                    imageContainer.append(data);
+                    inputUpload.val('');
+                    updateList();
                 }).fail(function (data) {
-                    console.log(data);
                     populateErrors(data.responseJSON);
                 });
             }
         });
 
+        $(document).on('submit', '.delete-image', function(e){
+            e.preventDefault();
+            $.ajax({
+                method: 'DELETE',
+                url: $(this).prop('action')
+            }).done(function(data){
+                $('.image[data-id="'+ data +'"]').remove();
+                updateList();
+            }).fail(function (data) {
+                console.log(data);
+            });
+        });
+
+        function updateList() {
+            var order = [];
+            $('.images-list .container .image').each(function(index, element) {
+                order.push($(element).data('id'));
+            });
+            imageids.val(order);
+        }
+
+        /**
+         * Sort the images
+         * @type {Element}
+         */
+        var sortableList = document.querySelector('.images-list .container');
+        var sortable = Sortable.create(sortableList, {
+            animation: 200,
+            handle: '.image',
+            onUpdate: function () {
+                updateList();
+            }
+        });
+
+        /**
+         * Populate the errors container
+         * @param data
+         */
         function populateErrors(data) {
             var errors = '<ul>';
             $.each(data,function (index, element) {
@@ -34,7 +75,6 @@ $(document).ready(function() {
                     errors += "<li>" + e + "</li>";
                 });
             });
-            console.log("error" + data);
             errors += "</ul>";
             errorsContainer.html(errors);
         }

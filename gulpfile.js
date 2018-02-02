@@ -17,6 +17,7 @@ elixir(mix => {
     mix.sass('app.scss'),
     mix.scripts([
         '../../../node_modules/jquery/dist/jquery.min.js',
+        '../../../node_modules/sortablejs/Sortable.min.js',
         'resources/assets/js'
     ], 'public/js/app.js');
     //mix.imageOptimize('resources/assets/images','public/images');

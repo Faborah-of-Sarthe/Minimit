@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Image extends Model
 {
@@ -49,5 +50,21 @@ class Image extends Model
     public function getLightPath()
     {
         return $this->prefixPathImagesLight . $this->filepath;
+    }
+
+
+    /**
+     * Override the delete function to remove the related files of an image
+     */
+    public function delete()
+    {
+        if(File::isFile($this->getFullPath()))
+            File::delete($this->getFullPath());
+        if(File::isFile($this->getLightPath()))
+            File::delete($this->getLightPath());
+        if(File::isFile($this->getThumbnailPath()))
+            File::delete($this->getThumbnailPath());
+
+        parent::delete();
     }
 }

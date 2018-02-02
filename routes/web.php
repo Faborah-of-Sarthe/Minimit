@@ -22,6 +22,8 @@ Route::get('random', ['as' => 'poster.random', 'uses' => "PosterController@rando
 Route::post('oeuvre/search', ['as' => 'oeuvre.search', 'uses' => 'OeuvreController@search']);
 
 Route::post('image', ['as' => 'image.store', 'uses' => 'ImageController@store']);
+Route::delete('image/{image}', ['as' => 'image.destroy', 'uses' => 'ImageController@destroy']);
+Route::model('image', 'App\Image');
 
 Route::resource('selection', 'SelectionController');
 Route::model('selection', 'App\Selection');

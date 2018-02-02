@@ -7,7 +7,7 @@ $(document).ready(function() {
         event.preventDefault();
         var popupContent = $(this).attr('data-text');
         confirmFormId = '.id-' + $(this).attr('data-id');
-        console.log(confirmFormId);
+
         $('.delete-dialog .popup-message').html(popupContent);
         $('.delete-dialog').show();
      });
