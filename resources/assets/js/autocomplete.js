@@ -3,25 +3,57 @@ $(document).ready(function() {
     //setup before functions
     var typingTimer;                //timer identifier
     var doneTypingInterval = 500;  //time in ms (0.5 seconds)
+    autocompleteField = $('.autocomplete-field'); // Autocompleted field
+    autocompleteResults = $('.autocomplete-results'); // Results container
+    hiddenField = $('.autofill-hidden'); // Hidden field containing the value
+    currentChoice = 0;
 
-    //on keyup, start the countdown
+    // Prevent moving the caret on up / down arrow navigation
+    $(document).on('keydown', '.autocomplete-field', function (e) {
+        if(e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13)
+           e.preventDefault();
+    });
+
+    // On keyup, start the countdown
     $(document).on('keyup', '.autocomplete-field', function(e){
         // Empty the hidden field on typing
-        $('.autofill-hidden').val(null);
-        // Ignore arrow keys
-        if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
-            return;
-        clearTimeout(typingTimer);
-        if ($(this).val()) {
-            var input = $(this);
-            $(input).addClass('throbbing');
-            typingTimer = setTimeout(function() {
-                doneTyping(input);
-            }, doneTypingInterval);
+       hiddenField.val(null);
+
+
+        if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13) {
+            clearTimeout(typingTimer);
+            if ($(this).val() && $(this).val().length >= 2) {
+                var input = $(this);
+                $(input).addClass('throbbing');
+                typingTimer = setTimeout(function() {
+                    doneTyping(input);
+                }, doneTypingInterval);
+            }
+        }
+        var results = $('.result', autocompleteResults).length;
+        if (results > 0) {
+            if (e.keyCode === 40) {
+                if(currentChoice < (results -1)) {
+                    currentChoice++;
+                    updateCurrentResult();
+                }
+            }
+            if (e.keyCode === 38) {
+                if(currentChoice > 0) {
+                    currentChoice--;
+                    updateCurrentResult();
+                }
+            }
+            if(e.keyCode === 13) {
+                autofillTarget($('.active.result', autocompleteResults));
+                closeAutocompleteList();
+            }
         }
     });
 
-    //user is "finished typing," do something
+
+
+    // User is "finished typing," do something
     function doneTyping(input) {
         $.ajax({
             url: $(input).attr('data-url'),
@@ -29,9 +61,9 @@ $(document).ready(function() {
             data: {oeuvre: $(input).val() }
         })
         .done(function(data) {
-            var autocompleteList = $('.autocomplete-results');
-            autocompleteList.html(data);
-            autocompleteList.removeClass('hidden');
+            autocompleteResults.html(data);
+            autocompleteResults.removeClass('hidden');
+            updateCurrentResult();
         })
         .fail(function() {
             console.log("error");
@@ -41,27 +73,27 @@ $(document).ready(function() {
         });
     }
 
-    //fill hidden oeuvre-id whenever a choice is selected
+    // Fill hidden oeuvre-id whenever a choice is selected
     function autofillTarget(selectedItem) {
         var oeuvreId = $(selectedItem).attr('data-id');
-        var hiddenField = $('.autofill-hidden');
         hiddenField.val(oeuvreId);
-        if ($('.autocomplete-field').hasClass('autofill')) {
-            $('.autocomplete-field').val($('.autofill-value',selectedItem).text());
+        if (autocompleteField.hasClass('autofill')) {
+            autocompleteField.val($('.autofill-value',selectedItem).text());
         }
     }
 
-    //closing autocomplete list
+    // Closing autocomplete list
     function closeAutocompleteList() {
-        var autocompleteList = $('.autocomplete-results');
-        autocompleteList.addClass('hidden');
+        currentChoice = 0;
+        autocompleteResults.addClass('hidden');
+        updateCurrentResult()
     }
 
     // Bind click on body if on an autocomplete page
-    if($('.autocomplete-results').length){
+    if(autocompleteResults.length){
         $(document).on('click', function(e){
             // Close the results pane and autofill the targeted fields
-            if ($('.autocomplete-results').is(':visible')) {
+            if (autocompleteResults.is(':visible')) {
                 if ($(e.target).hasClass('.result') || $(e.target).parents('.result').length) {
                     var result = ($(e.target).hasClass('.result'))? $(e.target) : $(e.target).parents('.result');
                     autofillTarget(result);
@@ -71,9 +103,14 @@ $(document).ready(function() {
         });
     }
 
-    //enter event
-    //$(document).on('keyup')
-
-    //arrow down event
+    function updateCurrentResult() {
+        $('.result', autocompleteResults).each(function(index, element) {
+            if (index === currentChoice) {
+                $(element).addClass('active');
+            } else {
+                $(element).removeClass('active');
+            }
+        });
+    }
 
 });

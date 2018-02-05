@@ -51,7 +51,9 @@ a {
   font-weight: bold;
 
 }
-
+.result.active {
+  background: darkgrey;
+}
 .colorized {
   color: $colorized;
   border-color: $colorized;
