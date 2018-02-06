@@ -49,6 +49,7 @@ class ImageController extends Controller
         if (!$request->ajax())
             return false;
 
+        $user = auth()->user();
         $this->validate($request, [
             'image' => 'image|dimensions:max_width=3020,min_width=700,min_height=1000'
         ]);
@@ -90,7 +91,8 @@ class ImageController extends Controller
         $image = \App\Image::create([
             'filepath' => $this->suffix.$filename,
             'poster_id' =>  $poster_id,
-            'level' => $level
+            'level' => $level,
+            'user_id' => $user->id,
         ]);
 
         $view = View::make('poster.singleimage', compact('image'));

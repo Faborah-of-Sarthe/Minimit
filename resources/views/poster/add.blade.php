@@ -4,7 +4,7 @@
 @section('container-class', 'poster-update')
 
 @section('content')
-    {!! Form::open(['route' => 'poster.store', 'method' => 'POST']) !!}
+    {!! Form::open(['route' => 'poster.store', 'method' => 'POST', 'class' => 'poster-main-form']) !!}
         @include('poster.form')
 @endsection
 @section('footer')

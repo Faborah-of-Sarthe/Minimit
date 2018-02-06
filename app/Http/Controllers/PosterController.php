@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Poster;
 use View;
 use Illuminate\Http\Request;
@@ -43,7 +44,28 @@ class PosterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        $this->validate($request, [
+            'oeuvre_id' => 'required|exists:oeuvres,id',
+            'image_ids' => 'required',
+        ]);
+
+        // Check on provided images
+        $images = explode(',', $request->image_ids);
+        $attached_images = [];
+        foreach ($images as $key => $imageId) {
+            $image = Image::find($imageId);
+            if($key < 5 && $image->user_id == $user->id)
+                $attached_images[] = $imageId;
+        }
+
+        $poster = new Poster();
+        $poster->oeuvre()->associate($request->oeuvre_id);
+        $poster->images()->saveMany($attached_images);
+        $poster->save();
+
+        Session::flash('message',trans('poster.creation_success_message'));
+        return redirect()->route('poster.index');
     }
 
     /**

@@ -103,6 +103,9 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Update the active option on the autocomplete field
+     */
     function updateCurrentResult() {
         $('.result', autocompleteResults).each(function(index, element) {
             if (index === currentChoice) {

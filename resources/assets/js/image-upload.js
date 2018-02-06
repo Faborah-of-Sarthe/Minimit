@@ -6,6 +6,9 @@ $(document).ready(function() {
         errorsContainer = $('.images .errors');
         imageids = $('.image-ids');
 
+        // First population of the hidden field
+        updateList();
+
 
         formUpload.submit(function (e) {
             e.preventDefault();

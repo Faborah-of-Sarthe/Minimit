@@ -30,7 +30,13 @@
 
     </div>
 </div>
-
+<div class="form-errors errors"></div>
 <div class="form-row">
-    {{ Form::submit(trans('poster.submit')) }}
+    {{ Form::submit(trans('poster.submit'), ['class' => 'submit-poster btn']) }}
 </div>
+<script>
+    var formErrors = {
+        emptyOeuvre: "{{ trans('poster.empty_oeuvre_error')}}",
+        emptyPosters: "{{ trans('poster.empty_posters_error')}}"
+    }
+</script>

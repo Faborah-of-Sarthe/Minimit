@@ -13,7 +13,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'filepath', 'level', 'poster_id'
+        'filepath', 'level', 'poster_id', 'user_id'
     ];
 
     public $prefixPathImages = 'uploads/posters/HD/';
