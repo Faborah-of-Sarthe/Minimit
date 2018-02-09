@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use App\Poster;
+use Illuminate\Support\Facades\Session;
 use View;
 use Illuminate\Http\Request;
 
@@ -56,13 +57,13 @@ class PosterController extends Controller
         foreach ($images as $key => $imageId) {
             $image = Image::find($imageId);
             if($key < 5 && $image->user_id == $user->id)
-                $attached_images[] = $imageId;
+                $attached_images[$imageId] = ['order' => $key +1];
         }
-
         $poster = new Poster();
         $poster->oeuvre()->associate($request->oeuvre_id);
-        $poster->images()->saveMany($attached_images);
+        $poster->user_id = $user->id;
         $poster->save();
+        $poster->images()->sync($attached_images);
 
         Session::flash('message',trans('poster.creation_success_message'));
         return redirect()->route('poster.index');

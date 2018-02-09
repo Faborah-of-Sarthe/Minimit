@@ -25,7 +25,7 @@ class Image extends Model
      */
      public function poster()
      {
-         return $this->belongsTo("App\Poster");
+         return $this->belongsToMany("App\Poster");
      }
 
     /**
