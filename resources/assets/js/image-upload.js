@@ -51,6 +51,11 @@ $(document).ready(function() {
             $('.images-list .container .image').each(function(index, element) {
                 order.push($(element).data('id'));
             });
+            if (order.length >= 5) {
+                inputUpload.prop('disabled', true);
+            } else {
+                inputUpload.prop('disabled', false);
+            }
             imageids.val(order);
         }
 
