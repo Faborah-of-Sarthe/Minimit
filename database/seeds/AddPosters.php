@@ -18,14 +18,14 @@ class AddPosters extends Seeder
                 'oeuvre_id' => $i,
             ]);
             DB::table('images')->insert([
-                'poster_id' => $i,
+//                'poster_id' => $i,
                 'filepath' => 'poster_'.$i.'_image_1.png',
                 'level' => '1'
             ]);
         }
         // extra image for Leon
         DB::table('images')->insert([
-            'poster_id' => 6,
+//            'poster_id' => 6,
             'filepath' => 'poster_6_image_2.png',
             'level' => '2'
         ]);

@@ -90,7 +90,6 @@ class ImageController extends Controller
 
         $image = \App\Image::create([
             'filepath' => $this->suffix.$filename,
-            'poster_id' =>  $poster_id,
             'level' => $level,
             'user_id' => $user->id,
         ]);

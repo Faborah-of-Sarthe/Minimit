@@ -26,8 +26,11 @@ class AddUserToImagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
+        if(Schema::hasColumn('images', 'user_id')) {
+            Schema::table('images', function (Blueprint $table) {
+                $table->dropForeign('images_user_id_foreign');
+                $table->dropColumn('user_id');
+            });
+        }
     }
 }
