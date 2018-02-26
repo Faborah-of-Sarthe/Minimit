@@ -33,8 +33,8 @@ class PosterController extends Controller
     public function create()
     {
         $images = [];
-        $poster = null;
-        return View::make('poster.add', compact('images', 'poster'));
+        $poster = $oeuvreTitle = null;
+        return View::make('poster.add', compact('images', 'poster', 'oeuvreTitle'));
     }
 
     /**
@@ -78,6 +78,7 @@ class PosterController extends Controller
     public function show(Poster $poster)
     {
 
+
     }
 
     /**
@@ -89,7 +90,8 @@ class PosterController extends Controller
     public function edit(Poster $poster)
     {
         $images = $poster->images;
-        return View::make('poster.edit', compact('poster', 'images'));
+        $oeuvreTitle = $poster->oeuvre->getTitleAttribute();
+        return View::make('poster.edit', compact('poster', 'images', 'oeuvreTitle'));
     }
 
     /**
@@ -101,7 +103,33 @@ class PosterController extends Controller
      */
     public function update(Request $request, Poster $poster)
     {
-        //
+        $user = auth()->user();
+        $this->validate($request, [
+            'oeuvre_id' => 'required|exists:oeuvres,id',
+            'image_ids' => 'required',
+        ]);
+
+        if($poster->user->id == $user->id || $user->is_admin == 1) {
+
+            // Check on provided images
+            $images = explode(',', $request->image_ids);
+            $attached_images = [];
+            foreach ($images as $key => $imageId) {
+                $image = Image::find($imageId);
+                if($key < 5 && $image->user_id == $user->id)
+                    $attached_images[$imageId] = ['order' => $key +1];
+            }
+            $poster->images()->sync($attached_images);
+            $poster->oeuvre()->associate($request->oeuvre_id);
+            $poster->save();
+            Session::flash('message',trans('poster.edit_success_message'));
+
+        } else {
+
+            Session::flash('error',trans('poster.owner_error'));
+
+        }
+        return redirect()->back();
     }
 
     /**
