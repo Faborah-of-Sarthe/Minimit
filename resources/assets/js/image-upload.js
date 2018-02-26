@@ -5,6 +5,7 @@ $(document).ready(function() {
         var imageContainer = $('.images-list .container');
         errorsContainer = $('.images .errors');
         imageids = $('.image-ids');
+        multipleSubmitSecurity = false;
 
         // First population of the hidden field
         updateList();
@@ -14,7 +15,8 @@ $(document).ready(function() {
             e.preventDefault();
             var file = inputUpload.val();
             errorsContainer.html('');
-            if (file) {
+            if (file && multipleSubmitSecurity === false) {
+                multipleSubmitSecurity = true;
                 var fileData =  new FormData($('.form-poster').get(0));
                 $.ajax({
                     method: $(this).prop('method'),
@@ -27,8 +29,10 @@ $(document).ready(function() {
                     imageContainer.append(data);
                     inputUpload.val('');
                     updateList();
+                    multipleSubmitSecurity = false;
                 }).fail(function (data) {
                     populateErrors(data.responseJSON);
+                    multipleSubmitSecurity = false;
                 });
             }
         });
