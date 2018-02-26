@@ -57,6 +57,12 @@ $(document).ready(function() {
                 inputUpload.prop('disabled', false);
             }
             imageids.val(order);
+
+            if($('.image', imageContainer).length > 0){
+                $('.no-images ').hide();
+            } else {
+                $('.no-images ').show();
+            }
         }
 
         /**

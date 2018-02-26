@@ -88,7 +88,8 @@ class PosterController extends Controller
      */
     public function edit(Poster $poster)
     {
-        return View::make('poster.edit', compact('poster'));
+        $images = $poster->images;
+        return View::make('poster.edit', compact('poster', 'images'));
     }
 
     /**
