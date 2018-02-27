@@ -14,7 +14,7 @@
                 {!! Form::hidden('poster_id', $poster, ['class' => 'poster-hidden']) !!}
                 {!! Form::file('image', ['class' => 'input-file', 'data-href' => route('image.store')]) !!}
             </label>
-            {{ Form::submit(trans('poster.upload_imag'), ['class' => 'upload-btn btn']) }}
+            {{ Form::submit(trans('poster.upload_image'), ['class' => 'upload-btn btn']) }}
         </div>
     {!! Form::close() !!}
     <div class="errors"></div>
