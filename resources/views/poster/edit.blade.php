@@ -6,3 +6,6 @@
     {!! Form::model($poster, ['route' => ['poster.update', $poster->id], 'method' => 'PUT', 'class' => 'poster-main-form']) !!}
         @include('poster.form')
 @endsection
+@section('footer')
+    @include('layouts.confirm-popup')
+@endsection
