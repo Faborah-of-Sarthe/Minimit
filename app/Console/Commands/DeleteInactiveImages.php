@@ -37,7 +37,7 @@ class DeleteInactiveImages extends Command
      */
     public function handle()
     {
-        $images = Image::where('poster_id', null)->get();
+        $images = Image::has('poster', '<', 1)->get();
         foreach ($images as $image) {
             $image->delete();
         }
