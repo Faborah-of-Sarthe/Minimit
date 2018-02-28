@@ -13,6 +13,7 @@ class PosterController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show', 'randomPoster']]);
+        $this->middleware('admin', ['only' => ['index']]);
     }
 
     /**
@@ -22,7 +23,8 @@ class PosterController extends Controller
      */
     public function index()
     {
-        return 'test';
+        $posters = Poster::orderBy('created_at', 'desc')->paginate(3);
+        return View::make('poster.index', compact('posters'));
     }
 
     /**
@@ -138,9 +140,19 @@ class PosterController extends Controller
      * @param  object $poster
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Poster $poster)
+    public function destroy(Request $request, Poster $poster)
     {
-        //
+        $user = auth()->user();
+        if (!$request->ajax())
+            return false;
+
+        if($user->id == $poster->user_id || $user->is_admin == 1) {
+            $poster->delete();
+            return json_encode($poster->id);
+        }
+        else {
+            return response('Unauthorized.', 401);
+        }
     }
 
     /**

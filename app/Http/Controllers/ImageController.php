@@ -105,11 +105,16 @@ class ImageController extends Controller
      */
     public function destroy(Request $request, \App\Image $image)
     {
+        $user = auth()->user();
         if (!$request->ajax())
             return false;
 
-        $image->delete();
-
-        return json_encode($image->id);
+        if($user->id == $image->user_id || $user->is_admin == 1) {
+            $image->delete();
+            return json_encode($image->id);
+        }
+        else {
+            return response('Unauthorized.', 401);
+        }
     }
 }

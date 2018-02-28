@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poster extends Model
 {
-
+    protected static function boot()
+    {
+        // Delete the images and files related to the poster
+        // Using $poster->images()->delete() will not trigger the file deletion, so we loop over each image
+        Poster::deleting(function($poster) {
+            $images = $poster->images;
+            foreach ($images as $image) {
+                $image->delete();
+            }
+        });
+    }
     /**
      * Get the user for one poster
      */
@@ -29,6 +39,12 @@ class Poster extends Model
     public function oeuvre()
     {
       return $this->belongsTo("App\Oeuvre");
+    }
+
+    public function getThumbnail()
+    {
+        $image = $this->images->first();
+        return $image->getThumbnailPath();
     }
 
     /**
