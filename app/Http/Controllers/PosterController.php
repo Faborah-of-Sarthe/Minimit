@@ -13,7 +13,6 @@ class PosterController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show', 'randomPoster']]);
-        $this->middleware('admin', ['only' => ['index']]);
     }
 
     /**
@@ -23,8 +22,10 @@ class PosterController extends Controller
      */
     public function index()
     {
-        $posters = Poster::orderBy('created_at', 'desc')->paginate(3);
-        return View::make('poster.index', compact('posters'));
+        $oeuvreTitle = '';
+        $posters = Poster::myPosters()->paginate(3);
+
+        return View::make('poster.index', compact('posters','oeuvreTitle'));
     }
 
     /**
@@ -153,6 +154,24 @@ class PosterController extends Controller
         else {
             return response('Unauthorized.', 401);
         }
+    }
+
+    /**
+     * Retrieve a list of posters filtered by  oeuvre
+     * @param Request $request
+     * @return bool
+     */
+    public function filter(Request $request)
+    {
+        if (!$request->ajax())
+            return false;
+
+        $oeuvre = $request->input('oeuvre');
+        $oeuvreTitle;
+
+        $posters = Poster::myPosters()->where('oeuvre_id', $oeuvre)->paginate(3);
+
+        return View::make('poster.elements.posters', compact('posters', 'oeuvreTitle'));
     }
 
     /**

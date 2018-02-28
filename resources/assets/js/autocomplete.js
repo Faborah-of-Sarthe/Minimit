@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     // Prevent moving the caret on up / down arrow navigation
     $(document).on('keydown', '.autocomplete-field', function (e) {
-        if(e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13)
+        if(e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13  || e.keyCode === 9)
            e.preventDefault();
     });
 
@@ -19,8 +19,7 @@ $(document).ready(function() {
         // Empty the hidden field on typing
        hiddenField.val(null);
 
-
-        if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13) {
+        if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13 && e.keyCode !== 9) {
             clearTimeout(typingTimer);
             if ($(this).val() && $(this).val().length >= 2) {
                 var input = $(this);
@@ -44,7 +43,7 @@ $(document).ready(function() {
                     updateCurrentResult();
                 }
             }
-            if(e.keyCode === 13) {
+            if(e.keyCode === 13 || e.keyCode === 9) {
                 autofillTarget($('.active.result', autocompleteResults));
                 closeAutocompleteList();
             }
@@ -76,7 +75,7 @@ $(document).ready(function() {
     // Fill hidden oeuvre-id whenever a choice is selected
     function autofillTarget(selectedItem) {
         var oeuvreId = $(selectedItem).attr('data-id');
-        hiddenField.val(oeuvreId);
+        hiddenField.val(oeuvreId).change();
         if (autocompleteField.hasClass('autofill')) {
             autocompleteField.val($('.autofill-value',selectedItem).text());
         }
@@ -86,6 +85,7 @@ $(document).ready(function() {
     function closeAutocompleteList() {
         currentChoice = 0;
         autocompleteResults.addClass('hidden');
+        autocompleteResults.html('');
         updateCurrentResult()
     }
 

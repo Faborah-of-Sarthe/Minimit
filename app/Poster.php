@@ -68,4 +68,18 @@ class Poster extends Model
 
         return $details;
     }
+
+    /**
+     * Retrieve all the posters of the current user. If the user is an admin, retrieve all the posters
+     * @param $query
+     */
+    public function scopeMyposters($query)
+    {
+        $user = auth()->user();
+        if($user->is_admin){
+            return $query->orderBy('created_at', 'desc');
+        } else {
+            return $query->where('user_id', $user->id)->orderBy('created_at', 'desc');
+        }
+    }
 }

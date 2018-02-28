@@ -1,9 +1,6 @@
+{!! Form::hidden('image_ids', null, ['class' => 'images-hidden image-ids']) !!}
 <div class="form-row">
-    {!! Form::label('oeuvre_title', trans('poster.oeuvre')) !!}
-    {!! Form::hidden('oeuvre_id', null, ['class' => 'autofill-hidden', 'autocomplete' => 'off']) !!}
-    {!! Form::hidden('image_ids', null, ['class' => 'images-hidden image-ids']) !!}
-    {!! Form::text('oeuvre_title', $oeuvreTitle, ['class' => 'autocomplete-field autofill oeuvre-title', 'data-url' => route('oeuvre.search'), 'autocomplete' => 'off']) !!}
-    <div class="autocomplete-results hidden"></div>
+     @include('poster.elements.autocomplete')
 </div>
 {!! Form::close() !!}
 <div class="images form-row">
@@ -24,7 +21,7 @@
         </div>
         <div class="container">
             @foreach($images as $image)
-                @include('poster.singleimage')
+                @include('poster.elements.singleimage')
             @endforeach
         </div>
 

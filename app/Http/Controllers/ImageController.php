@@ -94,7 +94,7 @@ class ImageController extends Controller
             'user_id' => $user->id,
         ]);
 
-        $view = View::make('poster.singleimage', compact('image'));
+        $view = View::make('poster.elements.singleimage', compact('image'));
 
         return json_encode($view->render());
     }
