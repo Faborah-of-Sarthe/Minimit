@@ -10,4 +10,4 @@
 @empty
     {{ trans('poster.list_empty') }}
 @endforelse
-{{ $posters->links() }}
+{!!  $posters->appends(Illuminate\Support\Facades\Input::except('page'))->links() !!}

@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class PosterController extends Controller
 {
+
+    public $_pagination = 15;
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show', 'randomPoster']]);
+        $this->middleware('ajax', ['only' => ['destroy', 'filter']]);
+        $this->middleware('owner:poster', ['only' => ['destroy', 'update', 'edit']]);
+
     }
 
     /**
@@ -22,10 +28,7 @@ class PosterController extends Controller
      */
     public function index()
     {
-        $oeuvreTitle = '';
-        $posters = Poster::myPosters()->paginate(3);
-
-        return View::make('poster.index', compact('posters','oeuvreTitle'));
+        return View::make('poster.index');
     }
 
     /**
@@ -36,8 +39,8 @@ class PosterController extends Controller
     public function create()
     {
         $images = [];
-        $poster = $oeuvreTitle = null;
-        return View::make('poster.add', compact('images', 'poster', 'oeuvreTitle'));
+        $poster  = null;
+        return View::make('poster.add', compact('images', 'poster'));
     }
 
     /**
@@ -112,26 +115,20 @@ class PosterController extends Controller
             'image_ids' => 'required',
         ]);
 
-        if($poster->user->id == $user->id || $user->is_admin == 1) {
 
-            // Check on provided images
-            $images = explode(',', $request->image_ids);
-            $attached_images = [];
-            foreach ($images as $key => $imageId) {
-                $image = Image::find($imageId);
-                if($key < 5 && $image->user_id == $user->id)
-                    $attached_images[$imageId] = ['order' => $key +1];
-            }
-            $poster->images()->sync($attached_images);
-            $poster->oeuvre()->associate($request->oeuvre_id);
-            $poster->save();
-            Session::flash('message',trans('poster.edit_success_message'));
-
-        } else {
-
-            Session::flash('error',trans('poster.owner_error'));
-
+        // Check on provided images
+        $images = explode(',', $request->image_ids);
+        $attached_images = [];
+        foreach ($images as $key => $imageId) {
+            $image = Image::find($imageId);
+            if($key < 5 && $image->user_id == $user->id)
+                $attached_images[$imageId] = ['order' => $key +1];
         }
+        $poster->images()->sync($attached_images);
+        $poster->oeuvre()->associate($request->oeuvre_id);
+        $poster->save();
+        Session::flash('message',trans('poster.edit_success_message'));
+
         return redirect()->back();
     }
 
@@ -143,35 +140,34 @@ class PosterController extends Controller
      */
     public function destroy(Request $request, Poster $poster)
     {
-        $user = auth()->user();
-        if (!$request->ajax())
-            return false;
-
-        if($user->id == $poster->user_id || $user->is_admin == 1) {
             $poster->delete();
             return json_encode($poster->id);
-        }
-        else {
-            return response('Unauthorized.', 401);
-        }
     }
 
     /**
-     * Retrieve a list of posters filtered by  oeuvre
+     * Retrieve a list of filtered posters
      * @param Request $request
      * @return bool
      */
     public function filter(Request $request)
     {
-        if (!$request->ajax())
-            return false;
 
-        $oeuvre = $request->input('oeuvre');
-        $oeuvreTitle;
+        $filters = $request->all();
+        $posters = Poster::myPosters();
 
-        $posters = Poster::myPosters()->where('oeuvre_id', $oeuvre)->paginate(3);
+        foreach ($filters as $filter => $value) {
 
-        return View::make('poster.elements.posters', compact('posters', 'oeuvreTitle'));
+            if ($filter == 'page')
+                continue;
+
+            if(!empty($value)) {
+                $posters->where($filter. '_id', $value);
+            }
+        }
+
+        $posters = $posters->paginate($this->_pagination);
+
+        return View::make('poster.elements.posters', compact('posters'));
     }
 
     /**

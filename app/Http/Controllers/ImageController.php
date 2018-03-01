@@ -36,6 +36,8 @@ class ImageController extends Controller
 
         $this->middleware('auth', ['except' => ['show']]);
         $this->middleware('owner:image', ['only' => ['destroy']]);
+        $this->middleware('ajax', ['only' => ['destroy', 'store']]);
+
     }
 
 
@@ -46,8 +48,6 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->ajax())
-            return false;
 
         $user = auth()->user();
         $this->validate($request, [
@@ -105,16 +105,7 @@ class ImageController extends Controller
      */
     public function destroy(Request $request, \App\Image $image)
     {
-        $user = auth()->user();
-        if (!$request->ajax())
-            return false;
-
-        if($user->id == $image->user_id || $user->is_admin == 1) {
             $image->delete();
             return json_encode($image->id);
-        }
-        else {
-            return response('Unauthorized.', 401);
-        }
     }
 }

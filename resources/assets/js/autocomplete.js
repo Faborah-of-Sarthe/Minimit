@@ -6,6 +6,7 @@ $(document).ready(function() {
     autocompleteField = $('.autocomplete-field'); // Autocompleted field
     autocompleteResults = $('.autocomplete-results'); // Results container
     hiddenField = $('.autofill-hidden'); // Hidden field containing the value
+    visualField = $('.chosen-oeuvre'); // Visible field containing the selected oeuvre
     currentChoice = 0;
 
     // Prevent moving the caret on up / down arrow navigation
@@ -16,10 +17,8 @@ $(document).ready(function() {
 
     // On keyup, start the countdown
     $(document).on('keyup', '.autocomplete-field', function(e){
-        // Empty the hidden field on typing
-       hiddenField.val(null);
 
-        if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13 && e.keyCode !== 9) {
+        if (e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 13 && e.keyCode !== 9 && e.keyCode !== 27) {
             clearTimeout(typingTimer);
             if ($(this).val() && $(this).val().length >= 2) {
                 var input = $(this);
@@ -28,6 +27,9 @@ $(document).ready(function() {
                     doneTyping(input);
                 }, doneTypingInterval);
             }
+        }
+        if(e.keyCode == 27) {
+            closeAutocompleteList();
         }
         var results = $('.result', autocompleteResults).length;
         if (results > 0) {
@@ -44,10 +46,14 @@ $(document).ready(function() {
                 }
             }
             if(e.keyCode === 13 || e.keyCode === 9) {
-                autofillTarget($('.active.result', autocompleteResults));
+                fillChosenOeuvre($('.active.result', autocompleteResults));
                 closeAutocompleteList();
             }
         }
+    });
+
+    $('.close', visualField).on('click', function () {
+        emptyChosenOeuvre();
     });
 
 
@@ -72,13 +78,20 @@ $(document).ready(function() {
         });
     }
 
-    // Fill hidden oeuvre-id whenever a choice is selected
-    function autofillTarget(selectedItem) {
+    // Fill hidden oeuvre-id and oeuvre name whenever a choice is selected
+    function fillChosenOeuvre(selectedItem) {
         var oeuvreId = $(selectedItem).attr('data-id');
         hiddenField.val(oeuvreId).change();
-        if (autocompleteField.hasClass('autofill')) {
-            autocompleteField.val($('.autofill-value',selectedItem).text());
-        }
+        $('.title', visualField).html($('.autofill-value',selectedItem).text());
+        visualField.removeClass('hidden');
+        autocompleteField.val('');
+    }
+
+    // Empty the oeuvre-id and oeuvre name fields
+    function emptyChosenOeuvre() {
+        hiddenField.val(null).change();
+        $('.title', visualField).html();
+        visualField.addClass('hidden');
     }
 
     // Closing autocomplete list
@@ -91,16 +104,16 @@ $(document).ready(function() {
 
     // Bind click on body if on an autocomplete page
     if(autocompleteResults.length){
-        $(document).on('click', function(e){
-            // Close the results pane and autofill the targeted fields
-            if (autocompleteResults.is(':visible')) {
-                if ($(e.target).hasClass('.result') || $(e.target).parents('.result').length) {
-                    var result = ($(e.target).hasClass('.result'))? $(e.target) : $(e.target).parents('.result');
-                    autofillTarget(result);
+            $(document).on('click', function(e){
+                if (autocompleteResults.is(':visible')) {
+                    // Close the results pane and autofill the targeted fields
+                    if ($(e.target).hasClass('.result') || $(e.target).parents('.result').length) {
+                        var result = ($(e.target).hasClass('.result'))? $(e.target) : $(e.target).parents('.result');
+                        fillChosenOeuvre(result);
+                    }
+                    closeAutocompleteList();
                 }
-                closeAutocompleteList();
-            }
-        });
+            });
     }
 
     /**
