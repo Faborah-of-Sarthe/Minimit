@@ -75,17 +75,6 @@ class PosterController extends Controller
         return redirect()->route('poster.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  object $poster
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Poster $poster)
-    {
-
-
-    }
 
     /**
      * Show the form for editing the specified resource.
