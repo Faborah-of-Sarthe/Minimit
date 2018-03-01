@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Owner
 {
@@ -20,7 +21,14 @@ class Owner
         $user_id = $request->$resourceName->user_id;
         $logged_user = $request->user();
         if ($logged_user->id != $user_id && $logged_user->is_admin != 1) {
-            abort(403, 'Unauthorized action.');
+
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                Session::flash('error',trans('global.unauthorized_page'));
+                return redirect('/');
+            }
+
         }
 
         return $next($request);

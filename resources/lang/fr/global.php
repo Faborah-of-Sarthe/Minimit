@@ -19,5 +19,5 @@ return [
     'list_menu'   => 'Liste des sélections',
     'login_menu' => 'Mon compte',
     'random_menu' => 'Aléatoire',
-
+    'unauthorized_page' => "Vous n'avez pas le droit d'accéder à cette page."
 ];

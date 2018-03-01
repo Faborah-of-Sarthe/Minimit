@@ -40,6 +40,10 @@ class Kernel extends HttpKernel
 
         'admin' => [
             \App\Http\Middleware\Admin::class
+        ],
+
+        'ajax' => [
+            \App\Http\Middleware\Ajax::class
         ]
     ];
 

@@ -19,5 +19,6 @@ return [
     'list_menu'   => 'Selections list',
     'login_menu' => 'My account',
     'random_menu' => 'Random poster',
+    'unauthorized_page' => "You are not allowed to view this page."
 
 ];
