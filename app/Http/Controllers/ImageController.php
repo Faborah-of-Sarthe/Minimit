@@ -105,7 +105,10 @@ class ImageController extends Controller
      */
     public function destroy(Request $request, \App\Image $image)
     {
-            $image->delete();
+            // We no more delete the images since the posters may fall imageless
+            // Instead we return the image id so we could "delete" the image on frontend and just
+            // detach the relation between the image and its poster after saving the poster.
+            // The image will be really destroyed by the daily CRON searching for posterless images
             return json_encode($image->id);
     }
 }
