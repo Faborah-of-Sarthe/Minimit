@@ -33,7 +33,7 @@ class Image extends Model
      */
     public function getThumbnailPath()
     {
-        return $this->prefixPathImagesThumb . $this->filepath;
+        return url('/') .  '/' . $this->prefixPathImagesThumb . $this->filepath;
     }
 
     /**

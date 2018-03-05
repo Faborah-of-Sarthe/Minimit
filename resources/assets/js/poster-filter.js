@@ -4,35 +4,36 @@ $(document).ready(function() {
         var form = hiddenField.parent('form');
 
         // Load all the posters on page loading
-        loadPosters(form.attr('action'));
+        loadPosters(form.attr('action'), '', container);
 
         // Filter the posters by oeuvre
         $(document).on('change', hiddenField, function () {
             var data = {oeuvre: hiddenField.val() };
-            loadPosters(form.attr('action'), data);
+            loadPosters(form.attr('action'), data, container);
         });
 
         // Handle ajax pagination
         $(document).on('click', '.pagination a', function (e){
             e.preventDefault();
-            loadPosters($(this).attr('href'));
+            loadPosters($(this).attr('href'), '', container);
         });
 
-        function loadPosters(action, data) {
-            $.ajax({
-                url: action,
-                type: 'get',
-                data: (data) ? data : ''
-            })
-            .done(function(data) {
-                container.html(data);
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            .always(function() {
-
-            });
-        }
     }
 });
+    function loadPosters(action, data, container) {
+        $.ajax({
+            url: action,
+            type: 'get',
+            data: (data) ? data : ''
+        })
+        .done(function(data) {
+            console.log(data);
+            container.html(data);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+
+        });
+    }

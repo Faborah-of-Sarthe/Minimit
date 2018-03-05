@@ -81,12 +81,6 @@ class ImageController extends Controller
         $image_thumb->fit(200, 285);
         $image_thumb->save($this->pathImagesThumb.$filename);
 
-//        if(isset($request->poster_id) && null !== $request->poster_id && '' !== $request->poster_id) {
-//            //TODO Bind poster to image and add the proper level
-//        }else {
-//            $poster_id = null;
-//            $level = 1;
-//        }
 
         $image = \App\Image::create([
             'filepath' => $this->suffix.$filename,

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Selection;
 use App\Poster;
-use View;
+use Illuminate\Support\Facades\View;
 
 class SelectionController extends Controller
 {
@@ -26,7 +26,8 @@ class SelectionController extends Controller
      */
     public function create()
     {
-        //
+        $posters = [];
+        return View::make('selection.add', compact('posters'));
     }
 
     /**

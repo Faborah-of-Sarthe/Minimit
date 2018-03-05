@@ -134,7 +134,7 @@ class PosterController extends Controller
     }
 
     /**
-     * Retrieve a list of filtered posters
+     * Retrieve the  posters of the current user (or all for an admin user) filtered
      * @param Request $request
      * @return bool
      */
@@ -154,9 +154,35 @@ class PosterController extends Controller
             }
         }
 
-        $posters = $posters->paginate($this->_pagination);
+        $posters = $posters->with( ['user', 'images'])->paginate($this->_pagination);
 
         return View::make('poster.elements.posters', compact('posters'));
+    }
+
+    /**
+     * Retrieve a list of filtered posters
+     * @param Request $request
+     * @return bool
+     */
+    public function search(Request $request)
+    {
+
+        $filters = $request->all();
+        $posters = Poster::query();
+
+        foreach ($filters as $filter => $value) {
+
+            if ($filter == 'page')
+                continue;
+
+            if(!empty($value)) {
+                $posters->where($filter. '_id', $value);
+            }
+        }
+
+        $posters = $posters->with( ['user', 'images'])->paginate($this->_pagination);
+
+        return View::make('poster.elements.posters-selection', compact('posters'));
     }
 
     /**

@@ -19,4 +19,5 @@ return [
     'searching_for' => "We're searching for ",
     'original' => "Original",
     'it_was' => "It was",
+    'no_posters' => 'No selected poster',
 ];
