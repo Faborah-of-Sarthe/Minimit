@@ -18,6 +18,7 @@ Route::get('account', ['as' => 'account.dashboard', 'uses' => 'AccountController
 
 Route::get('poster/filter', ['as' => 'poster.filter', 'uses' => 'PosterController@filter']);
 Route::get('poster/search', ['as' => 'poster.search', 'uses' => 'PosterController@search']);
+Route::post('poster/selected/{poster}', ['as' => 'poster.selected', 'uses' => 'PosterController@select']);
 Route::resource('poster', 'PosterController', ['except' => 'show']);
 Route::model('poster', 'App\Poster');
 Route::get('random', ['as' => 'poster.random', 'uses' => "PosterController@randomPoster"]);

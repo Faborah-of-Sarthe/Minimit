@@ -20,20 +20,3 @@ $(document).ready(function() {
 
     }
 });
-    function loadPosters(action, data, container) {
-        $.ajax({
-            url: action,
-            type: 'get',
-            data: (data) ? data : ''
-        })
-        .done(function(data) {
-            console.log(data);
-            container.html(data);
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-
-        });
-    }

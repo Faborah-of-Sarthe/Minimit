@@ -186,6 +186,18 @@ class PosterController extends Controller
     }
 
     /**
+     * Return the poster informations for selection page
+     *
+     * @param  object $poster
+     * @return \Illuminate\Http\Response
+     */
+    public function select(Poster $poster)
+    {
+        return View::make('selection.elements.poster', compact('poster'));
+    }
+
+
+    /**
      * Return the random poster page or an ajax view of a random poster
      */
     public function randomPoster(Request $request)

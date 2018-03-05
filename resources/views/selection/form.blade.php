@@ -6,6 +6,7 @@
 <div class="posters-selected">
     <ul>
         @forelse($posters as $poster)
+            @include('selection.elements.poster')
         @empty
             {{ trans('selection.no_posters') }}
         @endforelse
