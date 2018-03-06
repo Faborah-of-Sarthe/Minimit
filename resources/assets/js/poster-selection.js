@@ -22,17 +22,58 @@ $(document).ready(function() {
         });
 
         $(document).on('click', '.posters-result .poster', function (){
-           toggleSelectedPoster($(this));
+           updatePosterList($(this).data('id'));
         });
+
+
+        $(document).on('click', '.posters-selected .delete', function (){
+            updatePosterList($(this).parents('.poster').data('id'));
+        });
+
+        // The node to be monitored
+        var target = $('.posters-result')[0];
+
+        // Observe the posters after an ajax call to add the "selected" class to the already selected ones
+        var observer = new MutationObserver(function( mutations ) {
+            mutations.forEach(function( mutation ) {
+                var newNodes = mutation.addedNodes;
+                if( newNodes !== null ) { // If there are new nodes added
+                    var $nodes = $( newNodes ); // jQuery set
+                    updateSelectedClass($nodes);
+                }
+            });
+        });
+
+        var config = {
+            attributes: true,
+            childList: true,
+            characterData: true
+        };
+        observer.observe(target, config);
+
 
     }
 
     // Add the selected poster to the selection list
-    function toggleSelectedPoster(poster) {
-        var id = poster.data('id');
+    function updatePosterList(id) {
+        toggleSelectedPoster(id);
+        toggleListPoster(id);
+    }
+
+    // Toggle the 'selected' class on the selector's posters
+    function toggleSelectedPoster(id) {
+        var poster = $('.poster[data-id='+id+']', posterSelector);
+        if(poster.length) {
+            poster.toggleClass('selected');
+        }
+    }
+
+
+
+    // Add or remove a poster in the selected container
+    function toggleListPoster(id) {
+        var poster = $('.poster[data-id='+id+']', posterSelector);
         var posterSelected = $('.poster[data-id='+id+']', selectedContainer);
-        poster.toggleClass('selected');
-        console.log(posterSelected);
         if(posterSelected.length) {
             posterSelected.remove();
         } else {
@@ -50,6 +91,20 @@ $(document).ready(function() {
 
             });
         }
+    }
+
+    // Add or remove the selected class for the provided nodes
+    function updateSelectedClass(nodes) {
+        nodes.each(function() {
+            if ($(this).hasClass('poster')){
+                var id = $( this ).data('id');
+                if( $('.poster[data-id='+id+']', selectedContainer).length && !$(this).hasClass('selected') ) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            }
+        });
     }
 
 });

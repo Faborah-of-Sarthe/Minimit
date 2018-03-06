@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\View;
 
 class SelectionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
