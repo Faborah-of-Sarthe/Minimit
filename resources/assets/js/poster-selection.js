@@ -1,9 +1,11 @@
 $(document).ready(function() {
     if($('.posters-selected').length) {
-        selectedContainer = $('.posters-selected');
+        selectedContainer = $('.posters-selected .content');
         var posterSelector = $('.poster-selector');
         var form = hiddenField.parent('form');
         var container =  $('.posters-result',posterSelector);
+        selectedCount = $('.poster-count');
+        cookieName = $('.cookie-name');
 
         // Toggle the selector
         $('.add-posters, .poster-selector > .close').click(function () {
@@ -30,11 +32,8 @@ $(document).ready(function() {
             updatePosterList($(this).parents('.poster').data('id'));
         });
 
-        // The node to be monitored
-        var target = $('.posters-result')[0];
-
         // Observe the posters after an ajax call to add the "selected" class to the already selected ones
-        var observer = new MutationObserver(function( mutations ) {
+        var selectorObserver = new MutationObserver(function( mutations ) {
             mutations.forEach(function( mutation ) {
                 var newNodes = mutation.addedNodes;
                 if( newNodes !== null ) { // If there are new nodes added
@@ -43,14 +42,32 @@ $(document).ready(function() {
                 }
             });
         });
-
         var config = {
-            attributes: true,
             childList: true,
-            characterData: true
         };
-        observer.observe(target, config);
+        selectorObserver.observe($('.posters-result')[0], config);
 
+        // Observe the selected posters, update the number of it and save them in a cookie
+        var selectedObserver = new MutationObserver(function( mutations ) {
+            mutations.forEach(function( mutation ) {
+                var newPosters = mutation.target.childNodes;
+                if( newPosters !== null ){
+                    var $posters = $(newPosters);
+                    var count = 0;
+                    var ids = [];
+                    $posters.each(function(){
+                        if($(this).hasClass('poster')){
+                            count++;
+                            ids.push($(this).data('id'));
+                        }
+                    });
+
+                    selectedCount.html(count);
+                    setCookie(cookieName.val(), ids.join());
+                }
+            });
+        });
+        selectedObserver.observe(selectedContainer[0], config);
 
     }
 

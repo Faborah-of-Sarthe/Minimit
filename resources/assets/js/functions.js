@@ -16,3 +16,9 @@ function loadPosters(action, data, container) {
         });
 }
 
+
+function setCookie(name, value) {
+    $.post( '/cookie/set' , {'name':name, 'value':value})
+    .done(function(data){
+    });
+}

@@ -10,7 +10,6 @@
         {{ Form::close() }}
     </div>
     <div class="posters-container">
-        {{--@include('poster.elements.posters')--}}
     </div>
 @endsection
 @section('footer')

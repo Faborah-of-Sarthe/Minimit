@@ -1,15 +1,17 @@
-{!! Form::hidden('poster_ids', null, ['class' => 'posters-hidden posters-ids']) !!}
+
 <div class="form-row">
     {!! Form::label('title', trans('selection.title_label')) !!}
     {!! Form::text('title') !!}
 </div>
 <div class="posters-selected">
-    <ul>
+    <div class="empty-message  @if($posters) hidden @endif">
+        {{ trans('selection.no_posters') }}
+    </div>
+    <div class="content">
         @forelse($posters as $poster)
             @include('selection.elements.poster')
         @empty
-            {{ trans('selection.no_posters') }}
         @endforelse
-    </ul>
+    </div>
 </div>
 <div class="add-posters">{{ trans('selection.add_posters') }}</div>

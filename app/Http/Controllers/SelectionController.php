@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Selection;
 use App\Poster;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\View;
 
 class SelectionController extends Controller
@@ -32,6 +33,12 @@ class SelectionController extends Controller
     public function create()
     {
         $posters = [];
+        $cookie = Cookie::get('new_selection');
+        if ($cookie) {
+            $ids = explode(',', $cookie);
+            $posters = Poster::find($ids);
+        }
+
         return View::make('selection.add', compact('posters'));
     }
 
