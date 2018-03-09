@@ -14,4 +14,6 @@
         @endforelse
     </div>
 </div>
-<div class="add-posters">{{ trans('selection.add_posters') }}</div>
+<div class="form-row">
+    {{ Form::submit(trans('selection.submit'), ['class' => 'submit-poster btn']) }}
+</div>

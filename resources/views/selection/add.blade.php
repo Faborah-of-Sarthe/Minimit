@@ -8,5 +8,6 @@
         {!! Form::hidden('cookie-name', 'new_selection', ['class' => 'cookie-name']) !!}
         @include('selection.form')
     {!! Form::close() !!}
+    <div class="add-posters">{{ trans('selection.add_posters') }}</div>
     @include('selection.poster-selector')
 @endsection

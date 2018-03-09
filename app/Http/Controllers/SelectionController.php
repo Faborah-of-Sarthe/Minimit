@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Selection;
 use App\Poster;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class SelectionController extends Controller
 {
+
+    protected $_maxPosters = 99;
+
+
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store']]);
@@ -50,7 +55,27 @@ class SelectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'poster' => 'required|array|between:1,100|exists:posters,id',
+        ]);
+        $attached_posters = [];
+        foreach ($request->poster as $key => $posterId) {
+            if($key < $this->_maxPosters)
+                $attached_posters[$posterId] = ['order' => $key +1];
+        }
+        $selection = new Selection();
+        $selection->title = $request->title;
+        $selection->user_id = $user->id;
+        $selection->save();
+        $selection->posters()->sync($attached_posters);
+
+        $cookie = Cookie::forget($request->get('cookie-name'));
+
+        Session::flash('message',trans('selection.creation_success_message'));
+        return redirect()->route('selection.index')->withCookie($cookie);
+
     }
 
     /**

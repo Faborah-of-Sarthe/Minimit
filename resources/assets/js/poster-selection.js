@@ -43,7 +43,7 @@ $(document).ready(function() {
             });
         });
         var config = {
-            childList: true,
+            childList: true
         };
         selectorObserver.observe($('.posters-result')[0], config);
 
@@ -69,6 +69,15 @@ $(document).ready(function() {
         });
         selectedObserver.observe(selectedContainer[0], config);
 
+        /**
+         * Sort the posters
+         * @type {Element}
+         */
+        var sortableList = document.querySelector('.posters-selected .content');
+        Sortable.create(sortableList, {
+            animation: 200,
+            handle: '.poster'
+        });
     }
 
     // Add the selected poster to the selection list
