@@ -11,15 +11,18 @@ return [
     |
     */
 
-    'final_fav_me' => "Vous avez apprécié cette sélection ? Mettez-la en favori !",
-    'final_message' => "Merci d'avoir joué ! Nous espérons que cette sélection vous a plu.",
-    'final_please_note' => "Notez cette sélection : ",
+    'final_fav_me' => "Vous avez apprécié cette Minima'liste ? Mettez-la en favori !",
+    'final_message' => "Merci d'avoir joué ! Nous espérons que cette Minima'liste vous a plu.",
+    'final_please_note' => "Notez cette Minima'liste : ",
     'too_easy' => "Trop facile ?",
     'too_hard' => "Trop dur ?",
     'searching_for' => "On cherche ",
     'original' => "Original",
     'it_was' => "C'était",
     'no_posters' => 'Aucun poster choisi',
+    'creation_success_message' => "Votre Minima'liste a bien été créée !",
+    'add_posters' => "Ajouter des posters",
+    'submit' => "Sauvegarder",
 
     /* LIST */
     'by' => "par",
