@@ -13,21 +13,45 @@ class SelectionController extends Controller
 {
 
     protected $_maxPosters = 99;
+    public $_pagination = 10;
 
 
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store']]);
+        $this->middleware('ajax', ['only' => ['destroy', 'filter']]);
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filters = $request->all();
+        $selections = Selection::query();
+
+        foreach ($filters as $filter => $value) {
+
+            if(!empty($value)) {
+                // SEARCH
+                if ($filter == 'title' && $value != null) {
+                    $selections->where($filter, 'like', '%'.$value.'%');
+                }
+                // TAGS
+                elseif ($filter == 'tags') {
+                    $selections->whereHas($filter, function($query) use($value) {
+                        $query->whereIn('tag_id', $value);
+                    });
+                }
+            }
+        }
+
+        $selections = $selections->with('posters','tags','notes','user')->paginate($this->_pagination);
+
+        return View::make('selections.wrapper', compact('selections'));
     }
 
     /**
@@ -180,5 +204,15 @@ class SelectionController extends Controller
     public function destroy(Selection $selection)
     {
         //
+    }
+
+    /**
+     * Retrieve a list of filtered selections
+     * @param Request $request
+     * @return bool
+     */
+    public function search(Request $request)
+    {
+
     }
 }

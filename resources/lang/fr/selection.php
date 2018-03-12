@@ -20,4 +20,9 @@ return [
     'original' => "Original",
     'it_was' => "C'était",
     'no_posters' => 'Aucun poster choisi',
+
+    /* LIST */
+    'by' => "par",
+    'number_posters' => "poster|posters",
+    'play' => "Jouer",
 ];

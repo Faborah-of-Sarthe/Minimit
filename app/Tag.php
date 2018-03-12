@@ -22,4 +22,15 @@ class Tag extends Model
      {
          return $this->belongsToMany("App\Selection");
      }
+
+    /**
+     * Return the title of a tag according to the user's locale
+     * @return string $title
+     */
+    public function getTitleAttribute()
+    {
+        $lang = \App::getLocale();
+        $field = "title_".$lang;
+        return $this->{$field};
+    }
 }

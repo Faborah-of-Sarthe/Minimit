@@ -63,4 +63,25 @@ class Selection extends Model
      {
          return $this->hasMany("App\SelectionHome");
      }
+
+     /**
+      * Calculates the average rating of a given selection
+      * @return float $average
+      */
+     public function averageRating()
+     {
+         $total = 0;
+         $average = null;
+
+         foreach ($this->notes as $n) {
+             $total += $n->note;
+         }
+
+         $nbNotes = $this->notes->count();
+         if ($total > 0 && $nbNotes > 0) {
+             $average = $total / $nbNotes;
+         }
+
+         return $average;
+     }
 }
