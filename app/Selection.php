@@ -84,4 +84,20 @@ class Selection extends Model
 
          return $average;
      }
+
+     /**
+     * Has the given user added this selection to its favs?
+     */
+     public function isFavOfUser($user)
+     {
+         if(!$user)
+             return false;
+         $favs = $this->favourites;
+         $usersHavingFaved = array();
+
+         foreach ($favs as $fav) {
+             $usersHavingFaved[] = $fav->user_id;
+         }
+         return (in_array($user->id, $usersHavingFaved));
+     }
 }

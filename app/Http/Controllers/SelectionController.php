@@ -50,7 +50,7 @@ class SelectionController extends Controller
             }
         }
 
-        $selections = $selections->with('posters','tags','notes','user')->paginate($this->_pagination);
+        $selections = $selections->with('posters','tags','notes','user','favourites')->paginate($this->_pagination);
 
         return View::make('selections.wrapper', compact('selections', 'tags'));
     }

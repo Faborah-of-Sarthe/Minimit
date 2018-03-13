@@ -1,6 +1,8 @@
 @foreach($selections as $selection)
     <div class="selection-item">
-        <span class="icon"></span>{{-- TODO Remplacer par la fonctionnalité de favoris --}}
+        <div class="fav icon" data-status="{{ $selection->isFavOfUser(Auth::user()) ? 'is-faved' : 'not-faved' }}" data-id="{{ $selection->id }}">
+            <span class="label">{!! trans('selection.fav_me') !!}</span>
+        </div>{{-- TODO Ajout possibilité de mettre en favori --}}
         <h2 class="selection-title">{{ $selection->title }}</h2>
         <span class="auteur">{!! trans('selection.by') !!} {{ $selection->user->name }}</span>
         <span class="nb-posters">{{ $selection->posters->count() }} {!! trans_choice('selection.number_posters', $selection->posters->count()) !!}</span>
