@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Selection;
 use App\Poster;
+use App\Tag;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
@@ -19,7 +20,6 @@ class SelectionController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store']]);
-        $this->middleware('ajax', ['only' => ['destroy', 'filter']]);
     }
 
     /**
@@ -31,6 +31,7 @@ class SelectionController extends Controller
     public function index(Request $request)
     {
         $filters = $request->all();
+        $tags = Tag::all();
         $selections = Selection::query();
 
         foreach ($filters as $filter => $value) {
@@ -51,7 +52,7 @@ class SelectionController extends Controller
 
         $selections = $selections->with('posters','tags','notes','user')->paginate($this->_pagination);
 
-        return View::make('selections.wrapper', compact('selections'));
+        return View::make('selections.wrapper', compact('selections', 'tags'));
     }
 
     /**

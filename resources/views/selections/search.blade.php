@@ -1,14 +1,23 @@
+<div class="search-form">
+
 {!! Form::open(['route' => 'selection.index', 'method' => 'GET']) !!}
 
-{!! Form::label('title', 'Rechercher', ['class' => 'search-bar']) !!} {{-- localisation label --}}
+{!! Form::label('title', trans('selection.search_label'), ['class' => 'search-bar']) !!}
 {!! Form::text('title') !!}
 
-{!! Form::label('tags[]', 'test') !!}
-{!! Form::checkbox('tags[]', '1') !!}
+<p class="search-baseline">
+    {!! trans('selection.search_filters_baseline') !!}
+</p>
 
-{!! Form::label('tags[]', 'test') !!}
-{!! Form::checkbox('tags[]', '5') !!}
+<div class="filters">
+    @foreach($tags as $tag)
+    {!! Form::label('tags[]', $tag->title) !!}
+    {!! Form::checkbox('tags[]', $tag->id) !!}
+    @endforeach
+</div>
 
-{{ Form::submit(trans('selections.search_submit'), ['class' => 'submit-search btn']) }}
+{{ Form::submit(trans('selection.search_submit'), ['class' => 'submit-search btn']) }}
 
 {!! Form::close() !!}
+
+</div>

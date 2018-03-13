@@ -28,4 +28,7 @@ return [
     'by' => "by",
     'number_posters' => "poster|posters",
     'play' => "Play",
+    'search_filters_baseline' => "A Minima'list about a…",
+    'search_label' => "Search",
+    'search_submit' => "Search",
 ];

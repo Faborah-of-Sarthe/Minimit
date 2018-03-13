@@ -4,7 +4,7 @@
         <h2 class="selection-title">{{ $selection->title }}</h2>
         <span class="auteur">{!! trans('selection.by') !!} {{ $selection->user->name }}</span>
         <span class="nb-posters">{{ $selection->posters->count() }} {!! trans_choice('selection.number_posters', $selection->posters->count()) !!}</span>
-        <span class="note">{{ $selection->averageRating() }}</span>{{-- TODO Que faire si null? --}}
+        <span class="note" data-rating="{{ $selection->averageRating() }}">{{ $selection->averageRating() }}</span>
 
         <a class="play-selection btn" href="{{ route('selection.show', $selection) }}">
             <span>{!! trans('selection.play') !!}</span>

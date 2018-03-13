@@ -28,4 +28,7 @@ return [
     'by' => "par",
     'number_posters' => "poster|posters",
     'play' => "Jouer",
+    'search_filters_baseline' => "Une Minima'liste autour d'un(e)…",
+    'search_label' => "Rechercher",
+    'search_submit' => "Chercher",
 ];
