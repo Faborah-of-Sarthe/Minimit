@@ -89,7 +89,7 @@ class SelectionController extends Controller
         $user = auth()->user();
         $this->validate($request, [
             'title' => 'required|max:255',
-            'poster' => 'required|array|between:1,100|exists:posters,id',
+            'poster' => 'required|array|between:2,100|exists:posters,id',
         ]);
         $attached_posters = $this->preparePosters($request->poster);
 
@@ -117,12 +117,11 @@ class SelectionController extends Controller
     public function show(Selection $selection)
     {
         $posters     = $selection->posters->values();
-        dd($posters);
         $count       = count($posters);
         $poster      = $posters->get(0);
-        $next        = $posters->get(1);
+        $next        = ($count > 1) ? $posters->get(1) : null;
         $details     = $poster->getPosterDetails();
-        $idNext      = $next->id;
+        $idNext      = (!is_null($next)) ? $next->id : null;
         $idSelection = $selection->id;
         $current     = 1;
 
@@ -210,7 +209,7 @@ class SelectionController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:255',
-            'poster' => 'required|array|between:1,100|exists:posters,id',
+            'poster' => 'required|array|between:2,100|exists:posters,id',
         ]);
         $attached_posters = $this->preparePosters($request->poster);
         $selection->title = $request->title;
