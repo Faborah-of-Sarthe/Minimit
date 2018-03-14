@@ -142,20 +142,16 @@ class SelectionController extends Controller
 
         $idSelection = $request->selectionId;
         $selection = Selection::find($idSelection);
-        $count = $selection->posters()->groupBy('poster_id')->count();
+        $count = $selection->posters()->count();
 
         // Retrieve the poster to display with the relationship pivot attributes
         $poster = $selection->posters()->where('poster_id', $request->posterId)->withPivot('order')->first();
         $current = $poster->pivot->order;
         $details = $poster->getPosterDetails();
-
         // Retrieve the previous and next posters based on pivot order
-        $prev = $selection->posters()
-                ->wherePivot('order', '<', $poster->pivot->order)->get()->last();
+        $prev = $selection->posters()->wherePivot('order','=',  $current-1)->first();
 
-        $next = $selection->posters()
-                ->wherePivot('order', '>', $poster->pivot->order)
-                ->first();
+        $next = $selection->posters()->wherePivot('order', '=', $current+1)->first();
 
         // If there is no next poster, we are on the last poster, so we display
         // the final page
