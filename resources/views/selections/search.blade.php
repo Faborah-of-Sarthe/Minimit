@@ -11,8 +11,8 @@
 
 <div class="filters">
     @foreach($tags as $tag)
-    {!! Form::label('tags[]', $tag->title) !!}
-    {!! Form::checkbox('tags[]', $tag->id) !!}
+    {!! Form::label('tag_'.$tag->id, $tag->title) !!}
+    {!! Form::checkbox('tags[]', $tag->id, null, ['id' => 'tag_'.$tag->id]) !!}
     @endforeach
 </div>
 

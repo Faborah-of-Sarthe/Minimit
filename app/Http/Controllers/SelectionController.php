@@ -50,7 +50,7 @@ class SelectionController extends Controller
             }
         }
 
-        $selections = $selections->with('posters','tags','notes','user','favourites')->paginate($this->_pagination);
+        $selections = $selections->with('posters','tags','notes','user','favourites')->orderBy('id', 'desc')->paginate($this->_pagination);
 
         return View::make('selections.wrapper', compact('selections', 'tags'));
     }
@@ -63,13 +63,14 @@ class SelectionController extends Controller
     public function create()
     {
         $posters = [];
+        $tags = Tag::all();
         $cookie = Cookie::get('new_selection');
         if ($cookie) {
             $ids = explode(',', $cookie);
             $posters = Poster::find($ids);
         }
 
-        return View::make('selection.add', compact('posters'));
+        return View::make('selection.add', compact('posters', 'tags'));
     }
 
     /**
@@ -95,6 +96,7 @@ class SelectionController extends Controller
         $selection->user_id = $user->id;
         $selection->save();
         $selection->posters()->sync($attached_posters);
+        $selection->tags()->sync($request->tags);
 
         $cookie = Cookie::forget($request->get('cookie-name'));
 

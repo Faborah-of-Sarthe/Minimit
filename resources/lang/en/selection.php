@@ -23,6 +23,8 @@ return [
     'creation_success_message' => "Your Minima'list has been created !",
     'add_poster' => "Add some posters",
     'submit' => "Save",
+    'tags_selection' => "Minima'list type :",
+
 
     /* LIST */
     'by' => "by",
