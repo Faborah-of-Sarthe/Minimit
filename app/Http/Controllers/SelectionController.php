@@ -19,7 +19,7 @@ class SelectionController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store']]);
+        $this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy', 'store', 'mySelections']]);
     }
 
     /**
@@ -91,22 +91,20 @@ class SelectionController extends Controller
             'title' => 'required|max:255',
             'poster' => 'required|array|between:1,100|exists:posters,id',
         ]);
-        $attached_posters = [];
-        foreach ($request->poster as $key => $posterId) {
-            if($key < $this->_maxPosters)
-                $attached_posters[$posterId] = ['order' => $key +1];
-        }
+        $attached_posters = $this->preparePosters($request->poster);
+
         $selection = new Selection();
         $selection->title = $request->title;
         $selection->user_id = $user->id;
         $selection->save();
         $selection->posters()->sync($attached_posters);
-        $selection->tags()->sync($request->tags);
+        $tags = (isset($request->tags)) ? $request->tags : [];
+        $selection->tags()->sync($tags);
 
         $cookie = Cookie::forget($request->get('cookie-name'));
 
         Session::flash('message',trans('selection.creation_success_message'));
-        return redirect()->route('selection.index')->withCookie($cookie);
+        return redirect()->route('selection.my')->withCookie($cookie);
 
     }
 
@@ -119,6 +117,7 @@ class SelectionController extends Controller
     public function show(Selection $selection)
     {
         $posters     = $selection->posters->values();
+        dd($posters);
         $count       = count($posters);
         $poster      = $posters->get(0);
         $next        = $posters->get(1);
@@ -188,7 +187,16 @@ class SelectionController extends Controller
      */
     public function edit(Selection $selection)
     {
-        //
+        $tags = Tag::all();
+        $cookie = Cookie::get('selection_'.$selection->id);
+        if ($cookie) {
+            $ids = explode(',', $cookie);
+            $posters = Poster::whereIn('id',$ids)->with('oeuvre', 'user', 'images')->get();
+        } else {
+            $posters = $selection->posters('id')->with('oeuvre', 'user', 'images')->get();
+        }
+
+        return View::make('selection.edit', compact('selection', 'posters', 'tags'));
     }
 
     /**
@@ -200,7 +208,21 @@ class SelectionController extends Controller
      */
     public function update(Request $request, Selection $selection)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'poster' => 'required|array|between:1,100|exists:posters,id',
+        ]);
+        $attached_posters = $this->preparePosters($request->poster);
+        $selection->title = $request->title;
+        $selection->save();
+        $selection->posters()->sync($attached_posters);
+        $tags = (isset($request->tags)) ? $request->tags : [];
+        $selection->tags()->sync($tags);
+
+        $cookie = Cookie::forget($request->get('cookie-name'));
+
+        Session::flash('message',trans('selection.update_success_message'));
+        return redirect()->route('selection.my')->withCookie($cookie);
     }
 
     /**
@@ -222,5 +244,15 @@ class SelectionController extends Controller
     public function search(Request $request)
     {
 
+    }
+
+    public function preparePosters($posters)
+    {
+        $attached_posters = [];
+        foreach ($posters as $key => $posterId) {
+            if($key < $this->_maxPosters)
+                $attached_posters[$posterId] = ['order' => $key +1];
+        }
+        return $attached_posters;
     }
 }
