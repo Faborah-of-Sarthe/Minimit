@@ -30,6 +30,7 @@ Route::post('image', ['as' => 'image.store', 'uses' => 'ImageController@store'])
 Route::delete('image/{image}', ['as' => 'image.destroy', 'uses' => 'ImageController@destroy']);
 Route::model('image', 'App\Image');
 
+Route::get('my-selections', ['as' => 'selection.my', 'uses' => 'SelectionController@mySelections']);
 Route::resource('selection', 'SelectionController');
 Route::model('selection', 'App\Selection');
 Route::get('selection-navigation', ['as' => 'selection.navigation', 'uses' => 'SelectionController@navigation']);

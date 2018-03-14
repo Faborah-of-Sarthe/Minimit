@@ -10,7 +10,7 @@ return [
     | The following language lines are used for selection page.
     |
     */
-
+    'edit' => "Edit",
     'final_fav_me' => "Did you like this Minima'list ? Put in your favorites !",
     'final_message' => "Thank you for playing! We hope that you liked this Minima'list.",
     'final_please_note' => "Rate this Minima'list : ",
@@ -24,6 +24,7 @@ return [
     'add_poster' => "Add some posters",
     'submit' => "Save",
     'tags_selection' => "Minima'list type :",
+    'my_selections' => "My Minima'lists",
 
 
     /* LIST */

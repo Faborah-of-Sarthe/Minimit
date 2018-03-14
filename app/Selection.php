@@ -100,4 +100,18 @@ class Selection extends Model
          }
          return (in_array($user->id, $usersHavingFaved));
      }
+
+    /**
+     * Retrieve all the selections of the current user. If the user is an admin, retrieve all the selection
+     * @param $query
+     */
+    public function scopeMyselections($query)
+    {
+        $user = auth()->user();
+        if($user->is_admin){
+            return $query->orderBy('created_at', 'desc');
+        } else {
+            return $query->where('user_id', $user->id)->orderBy('created_at', 'desc');
+        }
+    }
 }

@@ -55,6 +55,11 @@ class SelectionController extends Controller
         return View::make('selections.wrapper', compact('selections', 'tags'));
     }
 
+    public function mySelections(Request $request) {
+        $selections = Selection::mySelections()->with('user', 'posters')->paginate($this->_pagination);
+        return View::make('selection.index', compact('selections'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
