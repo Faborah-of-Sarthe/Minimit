@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', trans('poster.selection_title'))
+@section('title', trans('selection.selection_title', ['name' => $selection->title]))
 
 @section('content')
     <div class="poster-wrapper">

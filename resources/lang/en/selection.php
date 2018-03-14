@@ -21,10 +21,12 @@ return [
     'it_was' => "It was",
     'no_posters' => 'No selected poster',
     'creation_success_message' => "Your Minima'list has been created !",
+    'update_success_message' => "Your Minima'list has been saved !",
     'add_poster' => "Add some posters",
     'submit' => "Save",
     'tags_selection' => "Minima'list type :",
     'my_selections' => "My Minima'lists",
+    'selection_title' => "Minima'list : :name",
 
 
     /* LIST */
