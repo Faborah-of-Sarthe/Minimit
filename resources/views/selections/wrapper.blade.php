@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', trans('selections.list_title'))
+@section('title', trans('selection.list_title'))
 
 
 @section('content')

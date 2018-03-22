@@ -129,6 +129,7 @@ class PosterController extends Controller
      */
     public function destroy(Request $request, Poster $poster)
     {
+            $poster->selections()->detach();
             $poster->delete();
             return json_encode($poster->id);
     }

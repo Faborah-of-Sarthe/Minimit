@@ -226,9 +226,11 @@ class SelectionController extends Controller
      * @param  Selection $selection
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Selection $selection)
+    public function destroy(Request $request, Selection $selection)
     {
-        //
+        $selection->posters()->detach();
+        $selection->delete();
+        return json_encode($selection->id);
     }
 
     /**

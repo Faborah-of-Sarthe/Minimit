@@ -27,7 +27,10 @@ return [
     'tags_selection' => "Minima'list type :",
     'my_selections' => "My Minima'lists",
     'selection_title' => "Minima'list : :name",
-
+    'title_label' => "Name your Minima'list",
+    'list_title' => "The Minima'lists",
+    'delete_selection_confirmation_message' => "Are you sure you want to delete this Minima'list. Pay attention, for this is irreversible !",
+    'selection_delete' => "Delete",
 
     /* LIST */
     'by' => "by",
