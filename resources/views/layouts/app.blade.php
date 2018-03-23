@@ -73,15 +73,21 @@
             </div>
         @endif
 
-        @if (View::hasSection('backlink'))
-            <div class="backlink">
-                <a href="{{ route(View::yieldContent('backlink')) }}" rel="nofollow">{{ trans("global.backlink") }}</a>
-            </div>
-        @endif
-
         <div class="content @hasSection('container-class')  @yield('container-class') @endif">
             <div class="content-wrapper">
-                @yield('content')
+                <div class="title-wrapper">
+                    @if(View::hasSection('main-title'))
+                        <h1>{{ View::yieldContent('main-title') }}</h1>
+                    @endif
+                    @if (false && View::hasSection('backlink'))
+                        <div class="backlink">
+                            <a href="{{ route(View::yieldContent('backlink')) }}" rel="nofollow">{{ trans("global.backlink") }}</a>
+                        </div>
+                    @endif
+                </div>
+                <div class="content">
+                    @yield('content')
+                </div>
             </div>
         </div>
 

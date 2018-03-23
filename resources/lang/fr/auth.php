@@ -12,7 +12,16 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'login_title' => 'Connexion',
+    'register_title' => 'Créer un compte',
+    'name' => "Nom, pseudo...",
+    'email_address' => "Adresse e-mail",
+    'password' => "Mot de passe",
+    'password_confirm' => "Confirmez le mot de passe",
+    'remember_me' => "Se souvenir de moi",
+    'register' => "Créer son compte",
+    'login' => "Se connecter",
+    'forgot_password' => "Mot de passe oublié ?",
     'failed'   => 'Ces identifiants ne correspondent pas à nos enregistrements',
     'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
 

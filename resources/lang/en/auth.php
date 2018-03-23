@@ -12,7 +12,15 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'login_title' => 'Login',
+    'register_title' => 'Register',
+    'name' => "Name, login...",
+    'email_address' => "Email address",
+    'password' => 'Password',
+    'password_confirm' => "Confirm the password",
+    'remember_me' => 'Remember me',
+    'login_button' => 'Login',
+    'forgot_password' => "Forgot Your Password?",
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
