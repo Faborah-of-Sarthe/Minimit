@@ -23,5 +23,6 @@ return [
     'forgot_password' => "Forgot Your Password?",
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'active_error' => 'Your account must be activated before you may login',
 
 ];

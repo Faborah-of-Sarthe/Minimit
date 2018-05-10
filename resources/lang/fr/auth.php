@@ -24,5 +24,5 @@ return [
     'forgot_password' => "Mot de passe oublié ?",
     'failed'   => 'Ces identifiants ne correspondent pas à nos enregistrements',
     'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
-
+    'active_error' => "Vous devez activer votre compte pour vous connecter",
 ];
