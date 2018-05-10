@@ -20,6 +20,7 @@ img {
 a {
   outline: 0;
   text-decoration: none;
+  color: $colorized;
 }
 
 .mobile-hidden {
@@ -38,30 +39,123 @@ a {
   overflow: hidden;
 }
 
+.content-wrapper {
+  padding: 1rem;
+}
 
+/**
+ * TEXTS
+ */
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+  font-family: $main-font;
+  font-weight: 600;
+}
+h1,.h1 {
+  font-size: 2.5rem;
+  padding: 2rem 0;
+}
+h2,.h2 {
+  padding: 2rem 0 1rem;
+  font-size: 1.5rem;
+}
+h3,.h3 {
+  padding: 1.5rem 0 0.5rem;
+  font-size: 1.25rem;
+}
+h4,.h4 {
+  padding: 1rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+p {
+  font-family: $lighter-font;
+}
+
+/**
+ * BUTTONS
+ */
 .btn{
-  border:3px solid $text-color;
+  border: 3px solid $text-color;
   color: $text-color;
   text-decoration: none;
-  padding: 1rem 0;
+  text-align: center;
+  padding: 1rem 2rem;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 5px;
-  font-size:.7rem;
-  font-weight: bold;
-
-}
-.result.active {
-  background: darkgrey;
+  font-size: .7rem;
+  font-weight: 600;
+  text-align: center;
+  display: table;
+  margin: 0.5rem 0;
+  &:hover {
+    background-color: $text-color;
+    color: white;
+    transition-property: background-color, color, border-color;
+    transition-duration: .3s;
+  }
 }
 .colorized {
   color: $colorized;
   border-color: $colorized;
+  &:hover {
+    background-color: $colorized;
+  }
 }
-
 .colorized-bg {
   background-color: $colorized;
+  &:hover {
+    color: $colorized;
+    background-color: transparent;
+  }
 }
+.btn-primary {
+  background-color: $colorized;
+  border-color: $colorized;
+  color: white;
+  &:hover {
+    color: $colorized;
+    background-color: white;
+    border-color: white;
+  }
+}
+.btn-link {
+  border: 0;
+  text-decoration: underline;
+}
+.result.active {
+  background: darkgrey;
+}
+
+
+/**
+ * FORMS
+ */
+.form-group {
+  margin-bottom: 2rem;
+}
+.form-row {
+  margin-bottom: 1rem;
+}
+.wide {
+  .field {
+    width: 100%;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+  }
+}
+.shared {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
 /**
  *  HEADER
  */
@@ -156,6 +250,9 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    .btn {
+      display: block;
+    }
   }
   .search-infos .main,
   .selection-name,
@@ -183,7 +280,7 @@ header{
 
 .controls .action-placeholder{
   flex: 1;
-  padding:0 .5rem;
+  padding: 0 .5rem;
 }
 .poster.selected img{
   opacity: .6;

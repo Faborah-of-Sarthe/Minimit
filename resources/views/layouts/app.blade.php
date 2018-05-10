@@ -77,7 +77,7 @@
             <div class="content-wrapper">
                 <div class="title-wrapper">
                     @if(View::hasSection('main-title'))
-                        <h1>{{ View::yieldContent('main-title') }}</h1>
+                        <h1 class="h1">{{ View::yieldContent('main-title') }}</h1>
                     @endif
                     @if (false && View::hasSection('backlink'))
                         <div class="backlink">

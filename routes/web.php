@@ -14,6 +14,9 @@
 Auth::routes();
 Route::get('switch-lang/{lang}', 'LanguageController@switchLang');
 Route::get('/', 'HomeController@index');
+
+Route::get('styleguide', 'StyleguideController@index');
+
 Route::get('account', ['as' => 'account.dashboard', 'uses' => 'AccountController@dashboard']);
 
 Route::get('poster/filter', ['as' => 'poster.filter', 'uses' => 'PosterController@filter']);
