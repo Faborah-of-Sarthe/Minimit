@@ -1,5 +1,24 @@
 
 /**
+ * FORMS
+ */
+.shared {
+  display: block;
+}
+.form-group.actions .action-wrapper {
+  display: block;
+  margin-left: 0;
+  width: 100%;
+  input, button {
+    width: 100%;
+  }
+}
+.field {
+  margin-bottom: 1rem;
+}
+
+
+/**
  *  HEADER
  */
 header {

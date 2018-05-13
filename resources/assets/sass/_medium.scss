@@ -4,11 +4,21 @@ body .mobile-hidden {
 body .desktop-hidden {
     display: none;
 }
-
 .content-wrapper {
     margin: 0 auto;
     max-width: 80rem;
 }
+
+/**
+ * FORMS
+ */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/**
+ * HEADER
+ */
 header{
     //background: yellow; //dev purposes
     height: 4em;

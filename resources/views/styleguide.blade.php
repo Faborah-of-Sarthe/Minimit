@@ -38,8 +38,8 @@
 
         <h2 class="h2">Liens</h2>
 
-        <a href="#">a simple</a><br>
-        <a href="#" class="btn">a.btn</a><br>
+        <a href="#">a simple</a>
+        <a href="#" class="btn">a.btn</a>
         <a class="btn btn-link">.btn.btn-link</a>
         <div class="backlink">
             <a href="#">.backlink a</a>
@@ -117,22 +117,20 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group actions">
                 <div class="action-wrapper">
-                    <button type="submit" class="btn btn-primary">
-                        button.btn.btn-primary
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="button.btn.btn-primary">
+                    </input>
                 </div>
             </div>
 
-            <div class="form-group shared">
+            <div class="form-group actions">
                 <div class="action-wrapper">
-                    <button type="submit" class="btn btn-primary">
-                        Shared button
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Shared button">
+                    </input>
                 </div>
                 <div class="action-wrapper">
-                    <button type="submit" class="btn btn-primary">
+                    <button class="btn">
                         Shared button
                     </button>
                 </div>
