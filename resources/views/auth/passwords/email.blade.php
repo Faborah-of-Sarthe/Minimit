@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('main-title', trans('auth.reset_password_title'))
+@section('container-class', 'compact-layout reset-password-page account')
 
 <!-- Main Content -->
 @section('content')

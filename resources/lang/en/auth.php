@@ -19,7 +19,7 @@ return [
     'password' => 'Password',
     'password_confirm' => "Confirm the password",
     'remember_me' => 'Remember me',
-    'register' => "Register",
+    'register_link' => "Not registered yet? Create an account!",
     'register_button' => "Create an account",
     'login' => "Login",
     'login_button' => 'Login',

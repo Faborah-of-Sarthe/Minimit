@@ -19,7 +19,7 @@ return [
     'password' => "Mot de passe",
     'password_confirm' => "Confirmez le mot de passe",
     'remember_me' => "Se souvenir de moi",
-    'register' => "Créer un compte",
+    'register_link' => "Pas encore inscrit ? Créer un compte !",
     'register_button' => "Créer un compte",
     'login' => "Se connecter",
     'login_button' => 'Se connecter',

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('main-title', trans('auth.register_title'))
+@section('container-class', 'compact-layout register-page account')
 @section('content')
 <div class="container">
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
@@ -51,7 +52,7 @@
         <div class="form-group actions">
             <div class="action-wrapper">
                 <button type="submit" class="btn btn-primary">
-                    {{ trans('auth.register') }}
+                    {{ trans('auth.register_button') }}
                 </button>
             </div>
         </div>

@@ -67,6 +67,7 @@
                     <input type="text" name="text3">
                 </div>
             </div>
+            <div class="form-separator"></div>
 
             <div class="form-group wide">
                 <div class="field">
@@ -89,6 +90,7 @@
                     </label>
                 </div>
             </div>
+            <div class="form-separator"></div>
 
             <div class="form-group wide">
                 <div class="field">
