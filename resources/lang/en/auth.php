@@ -20,10 +20,14 @@ return [
     'password_confirm' => "Confirm the password",
     'remember_me' => 'Remember me',
     'register' => "Register",
+    'register_button' => "Create an account",
+    'login' => "Login",
     'login_button' => 'Login',
     'forgot_password' => "Forgot Your Password?",
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'reset_password_button' => "Reset the password",
+    'reset_password_title' => "Reset password",
     'active_error' => 'Your account must be activated before you may login',
 
 ];

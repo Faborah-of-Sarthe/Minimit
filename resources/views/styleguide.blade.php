@@ -93,8 +93,7 @@
             <div class="form-group wide">
                 <div class="field">
                     <label for="textarea" class="control-label">Input textarea</label>
-                    <textarea name="textarea">
-                    </textarea>
+                    <textarea name="textarea"></textarea>
                 </div>
             </div>
 

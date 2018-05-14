@@ -81,6 +81,10 @@ p {
 /**
  * BUTTONS
  */
+a, button {
+  font-family: $main-font;
+  line-height: normal;
+}
 .btn{
   border: 3px solid $text-color;
   color: $text-color;
@@ -210,6 +214,9 @@ p {
     display: inline-block;
     margin-left: .5em;
   }
+}
+input[type=submit] {
+  border: none; /*rewriting standard style, it is necessary to be able to change the size*/
 }
 
 
